@@ -1,0 +1,12 @@
+*
+!*/
+!*.c
+!*.h
+!*.cpp
+!*.cxx
+!*.inl
+!*.sm
+!*.vcproj
+!*.vcxproj
+!*.sln
+!*.docx
