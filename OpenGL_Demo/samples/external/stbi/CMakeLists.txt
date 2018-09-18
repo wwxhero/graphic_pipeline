@@ -1,0 +1,1 @@
+add_library(stbi stb_image.h stb_image.c stb_image_write.h stb_image_write.c)
