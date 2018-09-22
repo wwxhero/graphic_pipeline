@@ -1,10 +1,10 @@
 //  ---------------------------------------------------------------------------
 //
 //  @file       TwEventWin.c
-//  @brief      Helper: 
-//              translate and re-send mouse and keyboard events 
+//  @brief      Helper:
+//              translate and re-send mouse and keyboard events
 //              from Windows message proc to AntTweakBar
-//  
+//
 //  @author     Philippe Decaudin
 //  @date       2006/05/10
 //  @license    This file is part of the AntTweakBar library.
@@ -31,7 +31,7 @@
 #define PARAM_INT int
 #endif
 
-// TwEventWin returns zero if msg has not been handled, 
+// TwEventWin returns zero if msg has not been handled,
 // and a non-zero value if it has been handled by the AntTweakBar library.
 int TW_CALL TwEventWin(void *wnd, unsigned int msg, unsigned PARAM_INT _W64 wParam, PARAM_INT _W64 lParam)
 {
@@ -40,7 +40,7 @@ int TW_CALL TwEventWin(void *wnd, unsigned int msg, unsigned PARAM_INT _W64 wPar
     static PARAM_INT s_PrevKeyDownMod = 0;
     static int s_PrevKeyDownHandled = 0;
 
-    switch( msg ) 
+    switch( msg )
     {
     case WM_MOUSEMOVE:
         // send signed! mouse coordinates
@@ -48,7 +48,7 @@ int TW_CALL TwEventWin(void *wnd, unsigned int msg, unsigned PARAM_INT _W64 wPar
         break;
     case WM_LBUTTONDOWN:
     case WM_LBUTTONDBLCLK:
-        SetCapture(wnd);
+        SetCapture((HWND)wnd);
         handled = TwMouseButton(TW_MOUSE_PRESSED, TW_MOUSE_LEFT);
         break;
     case WM_LBUTTONUP:
@@ -57,7 +57,7 @@ int TW_CALL TwEventWin(void *wnd, unsigned int msg, unsigned PARAM_INT _W64 wPar
         break;
     case WM_MBUTTONDOWN:
     case WM_MBUTTONDBLCLK:
-        SetCapture(wnd);
+        SetCapture((HWND)wnd);
         handled = TwMouseButton(TW_MOUSE_PRESSED, TW_MOUSE_MIDDLE);
         break;
     case WM_MBUTTONUP:
@@ -66,7 +66,7 @@ int TW_CALL TwEventWin(void *wnd, unsigned int msg, unsigned PARAM_INT _W64 wPar
         break;
     case WM_RBUTTONDOWN:
     case WM_RBUTTONDBLCLK:
-        SetCapture(wnd);
+        SetCapture((HWND)wnd);
         handled = TwMouseButton(TW_MOUSE_PRESSED, TW_MOUSE_RIGHT);
         break;
     case WM_RBUTTONUP:
@@ -204,7 +204,7 @@ int TW_CALL TwEventWin(void *wnd, unsigned int msg, unsigned PARAM_INT _W64 wPar
             // if the key has been handled at previous WM_KEYDOWN report this event as handled
             if( s_PrevKeyDown==wParam && s_PrevKeyDownMod==kmod )
                 handled = s_PrevKeyDownHandled;
-            else 
+            else
             {
                 // if the key would have been handled report this event as handled
                 int key = (int)(wParam&0xff);
@@ -234,9 +234,9 @@ int TW_CALL TwEventWin(void *wnd, unsigned int msg, unsigned PARAM_INT _W64 wPar
     }
 
     if( handled )
-        // Event has been handled by AntTweakBar, so we invalidate the window 
+        // Event has been handled by AntTweakBar, so we invalidate the window
         // content to send a WM_PAINT which will redraw the tweak bar(s).
-        InvalidateRect(wnd, NULL, FALSE);
+        InvalidateRect((HWND)wnd, NULL, FALSE);
 
     return handled;
 }

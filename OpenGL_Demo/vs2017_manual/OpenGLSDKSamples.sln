@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AntTweakBarStatic", "AntTweakBarStatic\AntTweakBarStatic.vcxproj", "{BA1CBD1B-E264-41A2-8308-55C259AE73B4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "common\common.vcxproj", "{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stbi", "stbi\stbi.vcxproj", "{ED133D7A-F5D6-4C97-B636-3D609175E154}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Triangle", "Triangle\Triangle.vcxproj", "{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +27,30 @@ Global
 		{BA1CBD1B-E264-41A2-8308-55C259AE73B4}.Release|Win32.Build.0 = Release|Win32
 		{BA1CBD1B-E264-41A2-8308-55C259AE73B4}.Release|x64.ActiveCfg = Release|x64
 		{BA1CBD1B-E264-41A2-8308-55C259AE73B4}.Release|x64.Build.0 = Release|x64
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Debug|Win32.Build.0 = Debug|Win32
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Debug|x64.ActiveCfg = Debug|x64
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Debug|x64.Build.0 = Debug|x64
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Release|Win32.ActiveCfg = Release|Win32
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Release|Win32.Build.0 = Release|Win32
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Release|x64.ActiveCfg = Release|x64
+		{2E0BE8E2-16C2-4626-9B03-EE2DACAE4DAF}.Release|x64.Build.0 = Release|x64
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Debug|Win32.Build.0 = Debug|Win32
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Debug|x64.ActiveCfg = Debug|x64
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Debug|x64.Build.0 = Debug|x64
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Release|Win32.ActiveCfg = Release|Win32
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Release|Win32.Build.0 = Release|Win32
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Release|x64.ActiveCfg = Release|x64
+		{ED133D7A-F5D6-4C97-B636-3D609175E154}.Release|x64.Build.0 = Release|x64
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Debug|Win32.Build.0 = Debug|Win32
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Debug|x64.ActiveCfg = Debug|x64
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Debug|x64.Build.0 = Debug|x64
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Release|Win32.ActiveCfg = Release|Win32
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Release|Win32.Build.0 = Release|Win32
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Release|x64.ActiveCfg = Release|x64
+		{03284BAF-45D7-41E6-B4E2-37A7FD95D1EC}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
