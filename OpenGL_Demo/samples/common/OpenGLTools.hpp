@@ -6,7 +6,7 @@
 #ifndef __opengl_tools_hpp__
 #define __opengl_tools_hpp__
 
-#include "opengl.hpp"
+#include "OpenGL.hpp"
 #include <string>
 
 namespace gl {
