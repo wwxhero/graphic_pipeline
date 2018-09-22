@@ -87,7 +87,7 @@ void DisplayErrorMessage(const char* header, const char* msg) {
 //-----------------------------------------------------------------------------
 // Window
 //-----------------------------------------------------------------------------
-Window::Window(const char* title, int w, int h, int x, int y) {
+GLWindow::GLWindow(const char* title, int w, int h, int x, int y) {
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -109,11 +109,11 @@ Window::Window(const char* title, int w, int h, int x, int y) {
     mFrameCount = 0;
 }
 //-----------------------------------------------------------------------------
-Window::~Window() {
+GLWindow::~GLWindow() {
     SDL_DestroyWindow(mWindow);
 }
 //-----------------------------------------------------------------------------
-void Window::Swap() {
+void GLWindow::Swap() {
     mFrameCount++;
 
     const Uint32 now = SDL_GetTicks();

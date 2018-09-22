@@ -37,10 +37,10 @@ void DisplayErrorMessage(const char* header, const char* msg);
 /**
  * Handles OpenGL window.
  */
-class Window {
+class GLWindow {
 public:
-    Window(const char* title, int w, int h, int x = SDL_WINDOWPOS_UNDEFINED, int y = SDL_WINDOWPOS_UNDEFINED);
-    ~Window();
+    GLWindow(const char* title, int w, int h, int x = SDL_WINDOWPOS_UNDEFINED, int y = SDL_WINDOWPOS_UNDEFINED);
+    ~GLWindow();
 
     /** Swaps OpenGL buffers. */
     void Swap();

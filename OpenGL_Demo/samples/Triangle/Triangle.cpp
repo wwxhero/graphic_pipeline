@@ -45,7 +45,7 @@ private:
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mVAO, mVBO, mProgram;
@@ -68,7 +68,7 @@ void Triangle::Run() {
 //-----------------------------------------------------------------------------
 void Triangle::Init() {
     // create window
-    mWindow = new Window("Triangle", 800, 600);
+    mWindow = new GLWindow("Triangle", 800, 600);
     
     // create OpenGL context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
