@@ -2,6 +2,7 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
 		<Project filename="common/common.cbp" />
-		<Project filename="common/stbi" />
+		<Project filename="stbi/stbi.cbp" />
+		<Project filename="Triangle/Triangle.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
