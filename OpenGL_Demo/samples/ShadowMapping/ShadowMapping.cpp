@@ -234,7 +234,7 @@ private:
     void DrawObjects(const glm::mat4& projView, bool shadowPass);
     void UpdateCamera(float dt);
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     vector<Object> mObjectList;
@@ -279,7 +279,7 @@ void ShadowMapping::Run() {
 void ShadowMapping::Init() {
     // window
     mWinWidth = 800, mWinHeight = 800;
-    mWindow = new Window("Shadow Mapping", mWinWidth, mWinHeight);
+    mWindow = new GLWindow("Shadow Mapping", mWinWidth, mWinHeight);
     
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {

@@ -155,7 +155,7 @@ private:
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mVAO;
@@ -189,7 +189,7 @@ void Monkey::Run() {
 void Monkey::Init() {
     // window
     const int w = 800, h = 600;
-    mWindow = new Window("Monkey", w, h);
+    mWindow = new GLWindow("Monkey", w, h);
     
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
