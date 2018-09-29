@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Triangle", "Triangle\Triang
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GshShell", "GshShell\GshShell.vcxproj", "{E16B00B8-5DB8-49FB-B472-55A2E6CAF253}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Monkey", "Monkey\Monkey.vcxproj", "{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -61,6 +63,14 @@ Global
 		{E16B00B8-5DB8-49FB-B472-55A2E6CAF253}.Release|Win32.Build.0 = Release|Win32
 		{E16B00B8-5DB8-49FB-B472-55A2E6CAF253}.Release|x64.ActiveCfg = Release|x64
 		{E16B00B8-5DB8-49FB-B472-55A2E6CAF253}.Release|x64.Build.0 = Release|x64
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Debug|Win32.Build.0 = Debug|Win32
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Debug|x64.ActiveCfg = Debug|x64
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Debug|x64.Build.0 = Debug|x64
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Release|Win32.ActiveCfg = Release|Win32
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Release|Win32.Build.0 = Release|Win32
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Release|x64.ActiveCfg = Release|x64
+		{7563F1BD-C9C6-4007-8CC0-624ECE0D78A8}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
