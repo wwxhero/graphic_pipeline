@@ -91,7 +91,7 @@ private:
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mProgram;
@@ -126,7 +126,7 @@ void GshShell::Run() {
 void GshShell::Init() {
     // window
     const int w = 800, h = 800;
-    mWindow = new Window("Geometry Shader Shell", w, h);
+    mWindow = new GLWindow("Geometry Shader Shell", w, h);
     
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
