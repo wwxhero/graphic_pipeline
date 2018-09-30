@@ -39,7 +39,7 @@ public:
     ~Triangle();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
@@ -48,7 +48,9 @@ private:
     GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
-    GLuint mVAO, mVBO, mProgram;
+    GLuint mVAO;
+    GLuint mVBO;
+    GLuint mProgram;
 };
 //-----------------------------------------------------------------------------
 Triangle::~Triangle() {
@@ -68,8 +70,9 @@ void Triangle::Run() {
 //-----------------------------------------------------------------------------
 void Triangle::Init() {
     // create window
-    mWindow = new GLWindow("Triangle", 800, 600);
-    
+    const int w = 800, h = 600;
+    mWindow = new GLWindow("Monkey", w, h);
+
     // create OpenGL context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");
@@ -80,26 +83,37 @@ void Triangle::Init() {
     // load OpenGL 3.0 functions
     gl::LoadCommandPointers(30);
 
+    // create GLSL Program
+    const GLuint c_idxPos = 0;
+    const GLuint c_idxClr = 1;
+    mProgram = gl::BuildProgram(Vsh(), Fsh(), false);
+    glBindAttribLocation(mProgram, c_idxPos, "Position");
+    glBindAttribLocation(mProgram, c_idxClr, "ColorIn");
+    gl::LinkProgram(mProgram);
+
     // create Vertex Buffer Object (VBO)
-    const float data[] = { -1, -1, 1, 0, 0,  1, -1, 0, 1, 0,  0, 1, 0, 0, 1 };
+    //                      x,  y, r, g, b
+    const float data[] = { -1, -1, 1, 0, 0
+                        ,   1, -1, 0, 1, 0
+                        ,   0,  1, 0, 0, 1 };
+
+    glGenVertexArrays(1, &mVAO);
+    glBindVertexArray(mVAO);
+
     glGenBuffers(1, &mVBO);
     glBindBuffer(GL_ARRAY_BUFFER, mVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(data), data, GL_STATIC_DRAW);
 
     // create Vertex Array Object (VAO)
     const GLsizei stride = sizeof(glm::vec2) + sizeof(glm::vec3);
-    glGenVertexArrays(1, &mVAO);
-    glBindVertexArray(mVAO);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, stride, 0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(sizeof(glm::vec2)));
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
 
-    // create GLSL Program
-    mProgram = gl::BuildProgram(Vsh(), Fsh(), false);
-    glBindAttribLocation(mProgram, 0, "Position");
-    glBindAttribLocation(mProgram, 1, "ColorIn");
-    gl::LinkProgram(mProgram);
+
+    glVertexAttribPointer(c_idxPos, 2, GL_FLOAT, GL_FALSE, stride, 0);
+    glEnableVertexAttribArray(c_idxPos);
+
+    glVertexAttribPointer(c_idxClr, 3, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(sizeof(glm::vec2)));
+    glEnableVertexAttribArray(c_idxClr);
+
 }
 //-----------------------------------------------------------------------------
 bool Triangle::ProcessEvents() {

@@ -201,9 +201,12 @@ void Monkey::Init() {
     // load OpenGL 3.0 functions
     gl::LoadCommandPointers(30);
 
+    // create GLSL Program
+    const GLuint c_idxPos = 0;
+    const GLuint c_idxNorm = 1;
     mProgram = gl::BuildProgram(VshPhong(), FshPhong(), false);
-    glBindAttribLocation(mProgram, 0, "Position");
-    glBindAttribLocation(mProgram, 1, "Normal");
+    glBindAttribLocation(mProgram, c_idxPos, "Position");
+    glBindAttribLocation(mProgram, c_idxNorm, "Normal");
     gl::LinkProgram(mProgram);
 
 	mDiffuseColor = glm::vec3(0.9f, 0.5f, 1);
@@ -221,11 +224,11 @@ void Monkey::Init() {
     glBufferData(GL_ARRAY_BUFFER, mloader.VertexSize() * mloader.VertexCount(), mloader.VertexData(), GL_STATIC_DRAW);
 
     const int stride = sizeof(glm::vec3) * 2;
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, 0);
-    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(c_idxPos, 3, GL_FLOAT, GL_FALSE, stride, 0);
+    glEnableVertexAttribArray(c_idxPos);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(sizeof(glm::vec3)));
-    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(c_idxNorm, 3, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(sizeof(glm::vec3)));
+    glEnableVertexAttribArray(c_idxNorm);
 
     glGenBuffers(1, &mEBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mEBO);
@@ -264,12 +267,12 @@ bool Monkey::ProcessEvents() {
 }
 //-----------------------------------------------------------------------------
 void Monkey::Update() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glUseProgram(mProgram);
+
     const Uint32 now = SDL_GetTicks();
     const float dt = (now - mLastTime) * 0.001f;
     mLastTime = now;
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     const glm::mat4 projView = glm::perspective(60.0f, 1.333f, 0.1f, 20.0f) *
         glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
@@ -277,7 +280,6 @@ void Monkey::Update() {
     const glm::mat4 world = glm::rotate(glm::degrees(rotY += dt), 0.0f, 1.0f, 0.0f);
     const glm::mat4 projViewWorld = projView * world;
 
-    glUseProgram(mProgram);
     glUniformMatrix4fv(glGetUniformLocation(mProgram,"MVPMatrix"), 1, GL_FALSE, glm::value_ptr(projViewWorld));
     glUniformMatrix4fv(glGetUniformLocation(mProgram, "WorldMatrix"), 1, GL_FALSE, glm::value_ptr(world));
 
@@ -291,9 +293,9 @@ void Monkey::Update() {
     glDrawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, 0);
 
     // draw GUI
+#ifdef WIN32
     glUseProgram(0);
     glBindVertexArray(0);
-#ifdef WIN32
     TwDraw();
 #endif
 
