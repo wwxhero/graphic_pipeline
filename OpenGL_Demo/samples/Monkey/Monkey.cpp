@@ -149,7 +149,7 @@ public:
     ~Monkey();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
@@ -190,7 +190,7 @@ void Monkey::Init() {
     // window
     const int w = 800, h = 600;
     mWindow = new GLWindow("Monkey", w, h);
-    
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");
@@ -234,7 +234,7 @@ void Monkey::Init() {
 
     glEnable(GL_DEPTH_TEST);
 
-    TwInit(TW_OPENGL, NULL);
+    int bInitialized = TwInit(TW_OPENGL, NULL);
     TwWindowSize(w, h);
     TwDeleteAllBars();
 
@@ -269,7 +269,7 @@ void Monkey::Update() {
     mLastTime = now;
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+
     const glm::mat4 projView = glm::perspective(60.0f, 1.333f, 0.1f, 20.0f) *
         glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
@@ -293,7 +293,9 @@ void Monkey::Update() {
     // draw GUI
     glUseProgram(0);
     glBindVertexArray(0);
+#ifdef WIN32
     TwDraw();
+#endif
 
     mWindow->Swap();
 }
