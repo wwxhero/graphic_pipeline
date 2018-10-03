@@ -95,16 +95,16 @@ private:
 namespace {
 const char* VshPhong() {
     return OGL_SHADER_BEGIN(130)
-        N  "uniform mat4 MVPMatrix;"
-        N  "uniform mat4 WorldMatrix;"
-        N  "in vec4 Position;"
-        N  "in vec3 Normal;"
-        N  "out vec3 WorldPos;"
-        N  "out vec3 WorldNormal;"
+        N  "uniform mat4 Model2Clip;"
+        N  "uniform mat4 Model2World;"
+        N  "in vec4 Pos_Model;"
+        N  "in vec3 Norm_Model;"
+        N  "out vec3 Pos_World;"
+        N  "out vec3 Norm_World;"
         N  "void main() {"
-        N  "    gl_Position = MVPMatrix * Position;"
-        N  "    WorldPos = vec3(WorldMatrix * Position);"
-        N  "    WorldNormal = mat3(WorldMatrix) * Normal;"
+        N  "    gl_Position = Model2Clip * Pos_Model;"
+        N  "    Pos_World = vec3(Model2World * Pos_Model);"
+        N  "    Norm_World = mat3(Model2World) * Norm_Model;"
         N  "}";
 }
 const char* FshPhong() {
@@ -115,26 +115,26 @@ const char* FshPhong() {
         N  "uniform float SurfaceSmooth;"
         N  "uniform vec3 LightPos[2] = vec3[2](vec3(10, 10, 12), vec3(-4, 5, 7));"
         N  "uniform vec3 LightIntensity[2] = vec3[2](vec3(2, 2, 2), vec3(1.6f, 1.6f, 0.6f));"
-        N  "in vec3 WorldPos;"
-        N  "in vec3 WorldNormal;"
+        N  "in vec3 Pos_World;"
+        N  "in vec3 Norm_World;"
         N  "out vec4 Color;"
-        N  "vec3 Shade(vec3 p, vec3 n) {"
-        N  "    vec3 eyeVec = normalize(EyePos - p);"
-        N  "    vec3 lightVec = normalize(LightPos[0] - p);"
-        N  "    vec3 halfVec = 0.5 * (eyeVec + lightVec);"
-        N  "    float cosTh = clamp(dot(n, halfVec), 0, 1);"
-        N  "    float cosTi = clamp(dot(n, lightVec), 0, 1);"
+        N  "vec3 Shade(vec3 p, vec3 nDir) {"
+        N  "    vec3 eyeDir = normalize(EyePos - p);"
+        N  "    vec3 lightDir = normalize(LightPos[0] - p);"
+        N  "    vec3 halfDir = normalize (eyeDir + lightDir);"
+        N  "    float cosTh = clamp(dot(nDir, halfDir), 0, 1);"
+        N  "    float cosTi = clamp(dot(nDir, lightDir), 0, 1);"
         N  "    vec3 Lo = (SurfaceDiffuse + SurfaceSpecular * pow(cosTh, SurfaceSmooth)) * LightIntensity[0] * cosTi;"
-        N  "    lightVec = normalize(LightPos[1] - p);"
-        N  "    halfVec = 0.5 * (eyeVec + lightVec);"
-        N  "    cosTh = clamp(dot(n, halfVec), 0, 1);"
-        N  "    cosTi = clamp(dot(n, lightVec), 0, 1);"
+        N  "    lightDir = normalize(LightPos[1] - p);"
+        N  "    halfDir = normalize (eyeDir + lightDir);"
+        N  "    cosTh = clamp(dot(nDir, halfDir), 0, 1);"
+        N  "    cosTi = clamp(dot(nDir, lightDir), 0, 1);"
         N  "    Lo += (SurfaceDiffuse + SurfaceSpecular * pow(cosTh, SurfaceSmooth)) * LightIntensity[1] * cosTi;"
         N  "    return Lo;"
         N  "}"
         N  "void main() {"
-        N  "    vec3 nw = normalize(WorldNormal);"
-        N  "    Color.rgb = Shade(WorldPos, nw);"
+        N  "    vec3 nw = normalize(Norm_World);"
+        N  "    Color.rgb = Shade(Pos_World, nw);"
         N  "    Color.a = 1;"
         N  "}";
 }
@@ -205,8 +205,8 @@ void Monkey::Init() {
     const GLuint c_idxPos = 0;
     const GLuint c_idxNorm = 1;
     mProgram = gl::BuildProgram(VshPhong(), FshPhong(), false);
-    glBindAttribLocation(mProgram, c_idxPos, "Position");
-    glBindAttribLocation(mProgram, c_idxNorm, "Normal");
+    glBindAttribLocation(mProgram, c_idxPos, "Pos_Model");
+    glBindAttribLocation(mProgram, c_idxNorm, "Norm_Model");
     gl::LinkProgram(mProgram);
 
 	mDiffuseColor = glm::vec3(0.9f, 0.5f, 1);
@@ -272,16 +272,19 @@ void Monkey::Update() {
 
     const Uint32 now = SDL_GetTicks();
     const float dt = (now - mLastTime) * 0.001f;
+
     mLastTime = now;
-    const glm::mat4 projView = glm::perspective(60.0f, 1.333f, 0.1f, 20.0f) *
-        glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    const glm::mat4 world2view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    const glm::mat4 view2clip = glm::perspective(60.0f, 1.333f, 0.1f, 20.0f);
+    const glm::mat4 world2clip = view2clip * world2view;
+
 
     static float rotY;
-    const glm::mat4 world = glm::rotate(glm::degrees(rotY += dt), 0.0f, 1.0f, 0.0f);
-    const glm::mat4 projViewWorld = projView * world;
+    const glm::mat4 model2world = glm::rotate(glm::degrees(rotY += 0), 0.0f, 1.0f, 0.0f);
+    const glm::mat4 modle2clip = world2clip * model2world;
 
-    glUniformMatrix4fv(glGetUniformLocation(mProgram,"MVPMatrix"), 1, GL_FALSE, glm::value_ptr(projViewWorld));
-    glUniformMatrix4fv(glGetUniformLocation(mProgram, "WorldMatrix"), 1, GL_FALSE, glm::value_ptr(world));
+    glUniformMatrix4fv(glGetUniformLocation(mProgram,"Model2Clip"), 1, GL_FALSE, glm::value_ptr(modle2clip));
+    glUniformMatrix4fv(glGetUniformLocation(mProgram, "Model2World"), 1, GL_FALSE, glm::value_ptr(model2world));
 
     const float PI = 3.1415926f;
     const float PI_INV = 1.0f / PI;

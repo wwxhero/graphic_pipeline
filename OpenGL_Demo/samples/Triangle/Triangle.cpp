@@ -105,13 +105,12 @@ void Triangle::Init() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(data), data, GL_STATIC_DRAW);
 
     // create Vertex Array Object (VAO)
-    const GLsizei stride = sizeof(glm::vec2) + sizeof(glm::vec3);
-
+    const GLsizei stride = 5 * sizeof(float);
 
     glVertexAttribPointer(c_idxPos, 2, GL_FLOAT, GL_FALSE, stride, 0);
     glEnableVertexAttribArray(c_idxPos);
 
-    glVertexAttribPointer(c_idxClr, 3, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(sizeof(glm::vec2)));
+    glVertexAttribPointer(c_idxClr, 3, GL_FLOAT, GL_FALSE, stride, (void*)(2*sizeof(float)));
     glEnableVertexAttribArray(c_idxClr);
 
 }
