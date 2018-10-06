@@ -292,7 +292,7 @@ private:
     void LoadEffect();
     static void TW_CALL LoadEffect_Entry(void* demoPtr);
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mVAO, mVBO, mProgram;
@@ -322,7 +322,7 @@ void ShaderEffects::Run() {
 //-----------------------------------------------------------------------------
 void ShaderEffects::Init() {
     // window
-    mWindow = new Window("Shader Effects", 800, 600);
+    mWindow = new GLWindow("Shader Effects", 800, 600);
     
     // OpenGL context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
