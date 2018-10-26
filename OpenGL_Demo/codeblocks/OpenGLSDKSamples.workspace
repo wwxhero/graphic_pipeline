@@ -4,5 +4,6 @@
 		<Project filename="common/common.cbp" />
 		<Project filename="stbi/stbi.cbp" />
 		<Project filename="Triangle/Triangle.cbp" />
+		<Project filename="Monkey/Monkey.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
