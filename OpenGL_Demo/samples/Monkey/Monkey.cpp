@@ -255,8 +255,9 @@ bool Monkey::ProcessEvents() {
         if (evt.type == SDL_QUIT) {
             return false;
         }
-
+#ifdef WIN32
         if (ProcessAntTweakBarEvent(evt)) continue;
+#endif
         ProcessCommonEvent(evt);
     }
 
