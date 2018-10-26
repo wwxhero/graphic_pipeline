@@ -206,7 +206,7 @@ void Monkey::Init() {
     glBindAttribLocation(mProgram, c_idxNorm, "Norm_Model");
     gl::LinkProgram(mProgram);
 
-	mDiffuseColor = glm::vec3(0.9f, 0.5f, 1);
+    mDiffuseColor = glm::vec3(0.9f, 0.5f, 1);
     mSpecularColor = glm::vec3(0.3f, 0.3f, 0.3f);
     mSmoothness = 256.0f;
 
@@ -255,8 +255,9 @@ bool Monkey::ProcessEvents() {
         if (evt.type == SDL_QUIT) {
             return false;
         }
-
+#ifdef WIN32
         if (ProcessAntTweakBarEvent(evt)) continue;
+#endif
         ProcessCommonEvent(evt);
     }
 
