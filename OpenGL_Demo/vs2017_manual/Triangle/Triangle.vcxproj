@@ -94,28 +94,31 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\Users\wanxwang\advanced_OS\OpenGL_Demo\dependencies\include\SDL;D:\Users\wanxwang\advanced_OS\OpenGL_Demo\samples\external;D:\Users\wanxwang\advanced_OS\OpenGL_Demo\samples\common;D:\Users\wanxwang\advanced_OS\OpenGL_Demo\samples\external\AntTweakBar\include;D:\Users\wanxwang\advanced_OS\OpenGL_Demo\samples\external\stbi;D:\Users\wanxwang\advanced_OS\OpenGL_Demo\samples\external\glm;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>..\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AntTweakBarStatic.lib;common.lib;stbi.lib;D:\Users\wanxwang\advanced_OS\OpenGL_Demo\dependencies\lib\SDL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>AntTweakBarStatic.lib;common.lib;stbi.lib;..\..\dependencies\lib\SDL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AntTweakBarStatic.lib;common.lib;stbi.lib;..\..\dependencies\lib\SDL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,12 +132,15 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AntTweakBarStatic.lib;common.lib;stbi.lib;..\..\dependencies\lib\SDL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,6 +154,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
