@@ -130,21 +130,10 @@ bool Triangle::ProcessEvents() {
 }
 //-----------------------------------------------------------------------------
 void Triangle::Update() {
-    //LogItem* l = LogStart("glClear");
-    //glClear(GL_COLOR_BUFFER_BIT);
-    //LogEnd(l);
-    //glClear(GL_COLOR_BUFFER_BIT);
-    TRACEGL_VOID_1(glClear, GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(mProgram);
     glBindVertexArray(mVAO);
-    //glDrawArrays(GL_TRIANGLES, 0, 3);
-    TRACEGL_VOID_3(glDrawArrays, GL_TRIANGLES, 0, 3);
-
-    while (glIsTransformFeedback(id))
-    {
-
-    }
-
+    glDrawArrays(GL_TRIANGLES, 0, 3);
     mWindow->Swap();
 }
 //-----------------------------------------------------------------------------
