@@ -5,5 +5,6 @@
 		<Project filename="stbi/stbi.cbp" />
 		<Project filename="Triangle/Triangle.cbp" />
 		<Project filename="Monkey/Monkey.cbp" />
+		<Project filename="GLTracer/GLTracer.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

@@ -20,6 +20,7 @@
 					<Add directory="../../samples/external/AntTweakBar/include" />
 					<Add directory="../../samples/external/glm" />
 					<Add directory="/usr/include/SDL2" />
+					<Add directory="../../GLTracer" />
 				</Compiler>
 				<Linker>
 					<Add library="libCommon.a" />
@@ -29,6 +30,7 @@
 					<Add library="X11" />
 					<Add library="GLX" />
 					<Add library="GL" />
+					<Add library="GLTracer" />
 					<Add directory="/usr/lib/x86_64-linux-gnu/" />
 					<Add directory="../Debug/" />
 				</Linker>

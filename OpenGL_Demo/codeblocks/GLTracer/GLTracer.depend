@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1541288032 source:/home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/GLTracer/libGLTracer_lin.cpp
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<string.h>
+	"libGLTracer.h"
+
+1541287205 /home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/GLTracer/libGLTracer.h
+
