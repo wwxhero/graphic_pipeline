@@ -5,6 +5,7 @@
 
 #include "Common.hpp"
 #include <stdexcept>
+#include "libGLTracer.h"
 using namespace std;
 
 //-----------------------------------------------------------------------------
@@ -133,7 +134,6 @@ void Triangle::Update() {
     glUseProgram(mProgram);
     glBindVertexArray(mVAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
-
     mWindow->Swap();
 }
 //-----------------------------------------------------------------------------

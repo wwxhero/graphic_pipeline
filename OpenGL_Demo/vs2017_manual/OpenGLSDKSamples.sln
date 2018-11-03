@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Monkey", "Monkey\Monkey.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEffects", "ShaderEffects\ShaderEffects.vcxproj", "{93263A3E-7585-49AE-B034-445578D41185}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLTracer", "GLTracer\GLTracer.vcxproj", "{0D4C38EC-A112-472B-A743-1D37AE1DFE00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -81,6 +83,14 @@ Global
 		{93263A3E-7585-49AE-B034-445578D41185}.Release|Win32.Build.0 = Release|Win32
 		{93263A3E-7585-49AE-B034-445578D41185}.Release|x64.ActiveCfg = Release|x64
 		{93263A3E-7585-49AE-B034-445578D41185}.Release|x64.Build.0 = Release|x64
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Debug|Win32.Build.0 = Debug|Win32
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Debug|x64.ActiveCfg = Debug|x64
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Debug|x64.Build.0 = Debug|x64
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Release|Win32.ActiveCfg = Release|Win32
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Release|Win32.Build.0 = Release|Win32
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Release|x64.ActiveCfg = Release|x64
+		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
