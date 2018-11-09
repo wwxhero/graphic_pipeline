@@ -126,4 +126,13 @@ extern "C"
 	}
 #endif
 
+#ifndef GLTRACE_SWAP_2
+#define GLTRACE_SWAP_2(func, p1, p2)\
+	{\
+		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
+		func(p1, p2);\
+		FuncLogSwapEnd(item);\
+	}
+#endif
+
 #endif
