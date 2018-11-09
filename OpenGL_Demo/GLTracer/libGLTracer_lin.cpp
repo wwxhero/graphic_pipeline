@@ -7,14 +7,14 @@ LogVoidItem* FuncLogVoidStart(const char* funcName, const char* fileName, unsign
 {
 	LogVoidItem* item = (LogVoidItem *)malloc(sizeof(LogVoidItem));
 	strncpy(item->func, funcName, GL_FUNC_LEN);
-	item->tmDur = 0; //::GetTickCount(); //fixme: may require more accurate function fot time record
+	item->tmDurCPU = 0; //::GetTickCount(); //fixme: may require more accurate function fot time record
 	strncpy(item->filePath, fileName, GL_PATH_LEN);
 	item->nLine = nLine;
 	return item;
 }
 void FuncLogVoidEnd(LogVoidItem* item)
 {
-	item->tmDur = 0; //::GetTickCount() - item->tmDur;
-	printf("%20s\t%10d\t%40s\t%d\n", item->func, item->tmDur, item->filePath, item->nLine);
+	item->tmDurCPU = 0; //::GetTickCount() - item->tmDurCPU;
+	printf("%20s\t%10d\t%40s\t%d\n", item->func, item->tmDurCPU, item->filePath, item->nLine);
 	free(item);
 }
