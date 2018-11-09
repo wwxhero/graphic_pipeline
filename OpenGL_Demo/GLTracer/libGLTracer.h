@@ -1,6 +1,8 @@
 #ifndef _LIBGLTRACER_H
 #define _LIBGLTRACER_H
-
+#ifdef WIN32
+#include <windows.h>
+#endif
 #define GL_FUNC_LEN			64
 #define GL_PATH_LEN			1024
 typedef struct LogItem_t
