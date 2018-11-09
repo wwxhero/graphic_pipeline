@@ -18,3 +18,16 @@ void FuncLogVoidEnd(LogItem* item)
 	printf("%20s\t%10d\t%40s\t%d\n", item->func, item->tmDurCPU, item->filePath, item->nLine);
 	free(item);
 }
+
+LogItem* FuncLogSwapStart(const char* funcName, const char* fileName, unsigned int nLine)
+{
+	LogItem* item = FuncLogVoidStart(funcName, fileName, nLine);
+	//fixme: collect GPU executing time since previous swap
+	return item;
+}
+
+void FuncLogSwapEnd(LogItem* item)
+{
+	//fixme: leave GPU time stamp for next swap
+	FuncLogVoidEnd(item);
+}

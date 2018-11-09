@@ -39,6 +39,8 @@ extern "C"
 #endif
 	_GLTRACER_API LogItem* FuncLogVoidStart(const char* funName, const char* fileName, unsigned int nLine);
 	_GLTRACER_API void FuncLogVoidEnd(LogItem* item);
+	_GLTRACER_API LogItem* FuncLogSwapStart(const char* funName, const char* fileName, unsigned int nLine);
+	_GLTRACER_API void FuncLogSwapEnd(LogItem* item);
 #ifdef __cplusplus
 }
 #endif
@@ -103,6 +105,24 @@ extern "C"
 		LogItem* item = FuncLogVoidStart(#func, __FILE__, __LINE__);\
 		func(p1, p2, p3, p4, p5, p6);\
 		FuncLogVoidEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_SWAP_0
+#define GLTRACE_SWAP_0(func)\
+	{\
+		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
+		func();\
+		FuncLogSwapEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_SWAP_1
+#define GLTRACE_SWAP_1(func, p1)\
+	{\
+		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
+		func(p1);\
+		FuncLogSwapEnd(item);\
 	}
 #endif
 
