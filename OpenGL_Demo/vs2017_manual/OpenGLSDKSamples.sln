@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEffects", "ShaderEffe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLTracer", "GLTracer\GLTracer.vcxproj", "{0D4C38EC-A112-472B-A743-1D37AE1DFE00}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CasesGLTracer", "CasesGLTracer\CasesGLTracer.vcxproj", "{2B348562-DC01-4094-9C4F-770F1B30BAB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -91,6 +93,14 @@ Global
 		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Release|Win32.Build.0 = Release|Win32
 		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Release|x64.ActiveCfg = Release|x64
 		{0D4C38EC-A112-472B-A743-1D37AE1DFE00}.Release|x64.Build.0 = Release|x64
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Debug|Win32.Build.0 = Debug|Win32
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Debug|x64.ActiveCfg = Debug|x64
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Debug|x64.Build.0 = Debug|x64
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Release|Win32.ActiveCfg = Release|Win32
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Release|Win32.Build.0 = Release|Win32
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Release|x64.ActiveCfg = Release|x64
+		{2B348562-DC01-4094-9C4F-770F1B30BAB9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
