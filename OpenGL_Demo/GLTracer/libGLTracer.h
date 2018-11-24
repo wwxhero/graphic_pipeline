@@ -19,8 +19,8 @@ extern "C"
 #endif
 	_GLTRACER_API LogItem* FuncLogStart(const char* funName, const char* fileName, unsigned int nLine);
 	_GLTRACER_API void FuncLogEnd(LogItem* item);
-	_GLTRACER_API LogItem* FuncLogSwapStart(const char* funName, const char* fileName, unsigned int nLine);
-	_GLTRACER_API void FuncLogSwapEnd(LogItem* item);
+	_GLTRACER_API LogItem* FuncLogSyncStart(const char* funName, const char* fileName, unsigned int nLine);
+	_GLTRACER_API void FuncLogSyncEnd(LogItem* item);
 
 	#include "traceGlFuncs.h"
 #ifdef __cplusplus
@@ -93,33 +93,69 @@ extern "C"
 #ifndef GLTRACE_SYNC_0
 #define GLTRACE_SYNC_0(func)\
 	{\
-		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
+		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
 		func();\
-		FuncLogSwapEnd(item);\
+		FuncLogSyncEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_1
 #define GLTRACE_SYNC_1(func, p1)\
 	{\
-		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
+		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
 		func(p1);\
-		FuncLogSwapEnd(item);\
+		FuncLogSyncEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_2
 #define GLTRACE_SYNC_2(func, p1, p2)\
 	{\
-		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
+		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
 		func(p1, p2);\
-		FuncLogSwapEnd(item);\
+		FuncLogSyncEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_SYNC_3
+#define GLTRACE_SYNC_3(func, p1, p2, p3)\
+	{\
+		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		func(p1, p2, p3);\
+		FuncLogSyncEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_SYNC_4
+#define GLTRACE_SYNC_4(func, p1, p2, p3, p4)\
+	{\
+		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		func(p1, p2, p3, p4);\
+		FuncLogSyncEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_SYNC_5
+#define GLTRACE_SYNC_5(func, p1, p2, p3, p4, p5)\
+	{\
+		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		func(p1, p2, p3, p4, p5);\
+		FuncLogSyncEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_SYNC_6
+#define GLTRACE_SYNC_6(func, p1, p2, p3, p4, p5, p6)\
+	{\
+		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		func(p1, p2, p3, p4, p5, p6);\
+		FuncLogSyncEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_RET_0
 #define GLTRACE_RET_0(func)\
-	GLTrace_##func(func)
+	GLTrace_##func(func, __FILE__, __LINE__)
 #endif
 
 #ifndef GLTRACE_RET_1
@@ -127,4 +163,28 @@ extern "C"
 	GLTrace_##func(func, p1, __FILE__, __LINE__)
 #endif
 
+#ifndef GLTRACE_RET_2
+#define GLTRACE_RET_2(func, p1, p2)\
+	GLTrace_##func(func, p1, p2, __FILE__, __LINE__)
+#endif
+
+#ifndef GLTRACE_RET_3
+#define GLTRACE_RET_3(func, p1, p2, p3)\
+	GLTrace_##func(func, p1, p2, p3, __FILE__, __LINE__)
+#endif
+
+#ifndef GLTRACE_RET_4
+#define GLTRACE_RET_4(func, p1, p2, p3, p4)\
+	GLTrace_##func(func, p1, p2, p3, p4, __FILE__, __LINE__)
+#endif
+
+#ifndef GLTRACE_RET_5
+#define GLTRACE_RET_5(func, p1, p2, p3, p4, p5)\
+	GLTrace_##func(func, p1, p2, p3, p4, p5, __FILE__, __LINE__)
+#endif
+
+#ifndef GLTRACE_RET_6
+#define GLTRACE_RET_6(func, p1, p2, p3, p4, p5, p6)\
+	GLTrace_##func(func, p1, p2, p3, p4, p5, p6, __FILE__, __LINE__)
+#endif
 #endif
