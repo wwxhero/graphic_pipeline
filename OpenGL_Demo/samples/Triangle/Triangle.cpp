@@ -135,6 +135,27 @@ void Triangle::Update() {
     glBindVertexArray(mVAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     mWindow->Swap();
+    struct Error
+    {
+        GLenum code;
+        const char* strInfo;
+    } error [] = {
+         { GL_NO_ERROR, "GL_NO_ERROR"}
+        ,{ GL_INVALID_ENUM , "GL_INVALID_ENUM" }
+        ,{ GL_INVALID_VALUE, "GL_INVALID_VALUE"}
+        ,{ GL_INVALID_OPERATION, "GL_INVALID_OPERATION"}
+        ,{ GL_INVALID_FRAMEBUFFER_OPERATION, "GL_INVALID_FRAMEBUFFER_OPERATION"}
+        ,{ GL_OUT_OF_MEMORY, "GL_OUT_OF_MEMORY"}
+    };
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR)
+    {
+        for (int i = 0; i < sizeof(error)/sizeof(Error); i ++)
+        {
+            if (error[i].code == err)
+                printf("Error:%s\n", error[i].strInfo);
+        }
+    }
 }
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
