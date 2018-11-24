@@ -22,38 +22,7 @@ extern "C"
 	_GLTRACER_API LogItem* FuncLogSwapStart(const char* funName, const char* fileName, unsigned int nLine);
 	_GLTRACER_API void FuncLogSwapEnd(LogItem* item);
 
-	//GLAPI GLboolean APIENTRY glIsProgram (GLuint program);
-	typedef GLboolean (APIENTRY* GLISPROGRAM) (GLuint program);
-	_GLTRACER_API GLboolean GLTrace_glIsProgram (GLISPROGRAM proc, GLuint program, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLenum GLTrace_glGetError(const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsEnabled(GLenum cap, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsTexture (GLuint texture, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsQuery (GLuint id, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsBuffer (GLuint buffer, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLvoid* GLTrace_glMapBuffer (GLenum target, GLenum access, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glUnmapBuffer (GLenum target, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLuint GLTrace_glCreateProgram (const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLuint GLTrace_glCreateShader (GLenum type, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsShader (GLuint shader, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsEnabledi (GLenum target, GLuint index, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsRenderbuffer (GLuint renderbuffer, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsFramebuffer (GLuint framebuffer, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLenum GLTrace_glCheckFramebufferStatus (GLenum target, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLvoid* GLTrace_glMapBufferRange (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsVertexArray (GLuint array, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLuint GLTrace_glGetUniformBlockIndex (GLuint program, const GLchar *uniformBlockName, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLsync GLTrace_glFenceSync (GLenum condition, GLbitfield flags, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsSync (GLsync sync, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLenum GLTrace_glClientWaitSync (GLsync sync, GLbitfield flags, GLuint64 timeout, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsNamedStringARB (GLint namelen, const GLchar *name, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsSampler (GLuint sampler, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLuint GLTrace_glGetSubroutineIndex (GLuint program, GLenum shadertype, const GLchar *name, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsTransformFeedback (GLuint id, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLuint GLTrace_glCreateShaderProgramv (GLenum type, GLsizei count, const GLchar* *strings, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLboolean GLTrace_glIsProgramPipeline (GLuint pipeline, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLsync GLTrace_glCreateSyncFromCLeventARB (struct _cl_context * context, struct _cl_event * event, GLbitfield flags, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLuint GLTrace_glGetDebugMessageLogARB (GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog, const char* fileName, unsigned int lineNum);
-	_GLTRACER_API GLenum GLTrace_glGetGraphicsResetStatusARB (const char* fileName, unsigned int lineNum);
+	#include "traceGlFuncs.h"
 #ifdef __cplusplus
 }
 #endif
@@ -121,8 +90,8 @@ extern "C"
 	}
 #endif
 
-#ifndef GLTRACE_SWAP_0
-#define GLTRACE_SWAP_0(func)\
+#ifndef GLTRACE_SYNC_0
+#define GLTRACE_SYNC_0(func)\
 	{\
 		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
 		func();\
@@ -130,8 +99,8 @@ extern "C"
 	}
 #endif
 
-#ifndef GLTRACE_SWAP_1
-#define GLTRACE_SWAP_1(func, p1)\
+#ifndef GLTRACE_SYNC_1
+#define GLTRACE_SYNC_1(func, p1)\
 	{\
 		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
 		func(p1);\
@@ -139,8 +108,8 @@ extern "C"
 	}
 #endif
 
-#ifndef GLTRACE_SWAP_2
-#define GLTRACE_SWAP_2(func, p1, p2)\
+#ifndef GLTRACE_SYNC_2
+#define GLTRACE_SYNC_2(func, p1, p2)\
 	{\
 		LogItem* item = FuncLogSwapStart(#func, __FILE__, __LINE__);\
 		func(p1, p2);\

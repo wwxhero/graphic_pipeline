@@ -94,7 +94,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;..\..\GLTracer</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;..\..\GLTracer;..\..\Logger</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
