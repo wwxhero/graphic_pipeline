@@ -40,7 +40,7 @@ public:
     ~MultiWindow();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
@@ -53,8 +53,8 @@ private:
 
     bool mRun;
 
-    Window* mWindow0;
-    Window* mWindow1;
+    GLWindow* mWindow0;
+    GLWindow* mWindow1;
 
     SDL_GLContext mGLContext0;
     SDL_GLContext mGLContext1;
@@ -77,9 +77,9 @@ void MultiWindow::Run() {
 //-----------------------------------------------------------------------------
 void MultiWindow::Init() {
     // create windows
-    mWindow0 = new Window("MultiWindow 0", 600, 600);
-    mWindow1 = new Window("MultiWindow 1", 600, 600);
-    
+    mWindow0 = new GLWindow("MultiWindow 0", 600, 600);
+    mWindow1 = new GLWindow("MultiWindow 1", 600, 600);
+
     SDL_GLContext tempContext = SDL_GL_CreateContext(mWindow0->Get());
     if (!tempContext) {
         throw runtime_error("failed to create tempContext");

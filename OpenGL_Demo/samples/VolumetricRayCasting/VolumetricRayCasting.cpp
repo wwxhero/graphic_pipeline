@@ -90,7 +90,7 @@ private:
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mPositionProg, mVolumeProg;
@@ -134,8 +134,8 @@ void VolumetricRayCasting::Run() {
 //-----------------------------------------------------------------------------
 void VolumetricRayCasting::Init() {
     // window
-    mWindow = new Window("Volumetric Ray Casting", 800, 800);
-    
+    mWindow = new GLWindow("Volumetric Ray Casting", 800, 800);
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");
@@ -319,7 +319,7 @@ void VolumetricRayCasting::Update() {
     // render back faces to the texture
     glUseProgram(mPositionProg);
     glUniformMatrix4fv(glGetUniformLocation(mPositionProg, "ModelViewProj"), 1, GL_FALSE, &modelViewProj[0][0]);
-    
+
     glCullFace(GL_FRONT);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mFBO);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -346,7 +346,7 @@ void VolumetricRayCasting::Update() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glBindVertexArray(mVAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
-   
+
     // draw GUI
     glUseProgram(0);
     glBindVertexArray(0);

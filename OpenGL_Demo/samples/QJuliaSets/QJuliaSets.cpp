@@ -127,13 +127,13 @@ public:
     ~QJuliaSets();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mProgram;
@@ -167,8 +167,8 @@ void QJuliaSets::Run() {
 void QJuliaSets::Init() {
     // window
     const int w = 800, h = 600;
-    mWindow = new Window("Quaternion Julia Sets", w, h);
-    
+    mWindow = new GLWindow("Quaternion Julia Sets", w, h);
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");

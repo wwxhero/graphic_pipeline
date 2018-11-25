@@ -2,7 +2,7 @@
 // For the latest info, see http://es.g0dsoft.com/
 // Copyright (c) 2010 Michal Ziulek
 // This source is under MIT License
-
+#define TW_STATIC
 #include "Common.hpp"
 #include <stdexcept>
 #include <limits>
@@ -109,7 +109,7 @@ bool Sphere::Intersect(const Ray& ray, float& distance) const {
 
     const float q = sqrt(mSqRadius - m2);
     distance = (l2 > mSqRadius) ? (s - q) : (s + q);
-    
+
     return true;
 }
 //-----------------------------------------------------------------------------
@@ -145,7 +145,7 @@ public:
     ~RaytracerCPU();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
@@ -158,7 +158,7 @@ private:
 
     void UpdateCamera(float dt);
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     vector<glm::vec3> mFramebuffer;
@@ -209,7 +209,7 @@ void RaytracerCPU::Run() {
 //-----------------------------------------------------------------------------
 void RaytracerCPU::Init() {
     // window
-    mWindow = new Window("Simple CPU Raytracer", 800, 600);
+    mWindow = new GLWindow("Simple CPU Raytracer", 800, 600);
 
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
@@ -233,12 +233,12 @@ void RaytracerCPU::Init() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, mWindow->Width(), mWindow->Height(), 0, GL_RGB, GL_FLOAT, NULL);
-    
+
     glGenBuffers(1, &mScreenBuffer);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, mScreenBuffer);
     glBufferData(GL_PIXEL_UNPACK_BUFFER, mWindow->Width() * mWindow->Height() * sizeof(glm::vec3), NULL, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-    
+
     // program
     mProgram = gl::BuildProgram(Vsh(), Fsh());
 
@@ -271,7 +271,7 @@ void RaytracerCPU::Init() {
     p->SetReflection(1);
 	mPrimitive.push_back(p);
 
-    
+
     mLight.push_back(new Light(glm::vec3(0, 5, -5), glm::vec3(0.6f)));
     mLight.push_back(new Light(glm::vec3(2, 5, -1), glm::vec3(0.7f, 0.7f, 0.9f)));
     mLight.push_back(new Light(glm::vec3(0, 15, 0), glm::vec3(0.8)));
@@ -324,14 +324,14 @@ void RaytracerCPU::Update() {
         GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
     memcpy(ptr, &mFramebuffer[0], mWindow->Width() * mWindow->Height() * sizeof(glm::vec3));
     glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
-    
+
     // update texture content
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, mScreenBuffer);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, mWindow->Width(), mWindow->Height(),
         GL_RGB, GL_FLOAT, 0);
 
     Raytrace(glm::inverse(view));
-        
+
     glUseProgram(mProgram);
     glBindVertexArray(mVAO);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -358,7 +358,7 @@ void RaytracerCPU::Raytrace(const glm::mat4& view) {
 
             const glm::vec3 rO = glm::vec3(view * glm::vec4(kcx, kcy, 0, 1));
             const Ray ray(rO, glm::normalize(rO - orig));
-            
+
             mFramebuffer[y * mWindow->Width() + x] = Trace(ray);
         }
     }
@@ -382,7 +382,7 @@ glm::vec3 RaytracerCPU::Shade(const Ray& ray, const Primitive& prim, const glm::
     for (size_t i = 0; i < mLight.size(); ++i) {
         const glm::vec3 lightVec = mLight[i]->GetPosition() - p;
         const glm::vec3 l = glm::normalize(lightVec);
-        
+
         float dist;
         const Ray shadowRay(p + l * 0.001f, l);
         IntersectAll(shadowRay, dist);

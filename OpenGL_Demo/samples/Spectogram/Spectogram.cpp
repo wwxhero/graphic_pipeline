@@ -42,7 +42,7 @@ public:
     ~Spectogram();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
@@ -51,12 +51,12 @@ private:
     void AudioCallback(Uint8* stream, int len);
     static void SDLCALL AudioCallback_Entry(void* userdata, Uint8* stream, int len);
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
     SDL_AudioDeviceID mAudioDevice;
 
     GLuint mVAO, mSamplesVBO, mGridVBO, mProgram;
- 
+
     OggVorbis_File mVorbisFile;
     bool mVorbisFileOpened;
 
@@ -92,8 +92,8 @@ void Spectogram::Run() {
 //-----------------------------------------------------------------------------
 void Spectogram::Init() {
     // create window
-    mWindow = new Window("Spectogram", 800, 600);
-    
+    mWindow = new GLWindow("Spectogram", 800, 600);
+
     // create OpenGL context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");

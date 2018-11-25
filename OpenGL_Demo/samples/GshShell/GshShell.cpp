@@ -85,13 +85,13 @@ public:
     ~GshShell();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mProgram;
@@ -126,8 +126,8 @@ void GshShell::Run() {
 void GshShell::Init() {
     // window
     const int w = 800, h = 800;
-    mWindow = new Window("Geometry Shader Shell", w, h);
-    
+    mWindow = new GLWindow("Geometry Shader Shell", w, h);
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");
@@ -171,7 +171,7 @@ void GshShell::Init() {
     TwBar* bar = TwNewBar("Menu");
     TwDefine("Menu color='0 0 0' alpha=128 position='10 10' size='240 220'");
     TwDefine("Menu fontresizable=false resizable=false");
-    
+
     TwAddVarRW(bar, "A", TW_TYPE_FLOAT, &mA, "step=0.025 min=0.3 max=1");
     TwAddVarRW(bar, "B", TW_TYPE_FLOAT, &mB, "step=0.025 min=1 max=4");
     TwAddVarRW(bar, "C", TW_TYPE_FLOAT, &mC, "step=0.025 min=0 max=1");
@@ -262,7 +262,7 @@ void GshShell::Update() {
     mTriCount = mResolution * mResolution * 2;
 
     glBindVertexArray(mVAO);
-    
+
     glUniform1i(glGetUniformLocation(mProgram, "Wireframe"), 0);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_POINTS, 0, mResolution * mResolution);

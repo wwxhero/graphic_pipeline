@@ -171,7 +171,7 @@ public:
     ~RaytracerGPU();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
@@ -179,7 +179,7 @@ private:
 
     void UpdateCamera(float dt);
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mProgram;
@@ -209,8 +209,8 @@ void RaytracerGPU::Run() {
 //-----------------------------------------------------------------------------
 void RaytracerGPU::Init() {
     // window
-    mWindow = new Window("Simple GPU Raytracer", 800, 600);
-    
+    mWindow = new GLWindow("Simple GPU Raytracer", 800, 600);
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");

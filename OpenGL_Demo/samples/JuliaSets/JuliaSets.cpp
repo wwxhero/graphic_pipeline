@@ -64,13 +64,13 @@ public:
     ~JuliaSets();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mVAO, mVBO, mProgram;
@@ -108,8 +108,8 @@ void JuliaSets::Run() {
 void JuliaSets::Init() {
     // window
     const int w = 1200, h = 800;
-    mWindow = new Window("JuliaSets", w, h);
-    
+    mWindow = new GLWindow("JuliaSets", w, h);
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");

@@ -37,7 +37,7 @@ const char* VshFractalFlame() {
         N  "        p = Swirl(p, radius, theta);"
         N  "    }"
         N  "    gl_Position = ProjView * p;"
-        N  "    Texcoord = c;"   
+        N  "    Texcoord = c;"
         N  "}";
 }
 const char* FshFractalFlame() {
@@ -154,7 +154,7 @@ GLuint CreatePaletteTexture(const char* filename) {
     if (!data) {
         throw runtime_error(string("failed to load ") + filename);
     }
-    
+
     GLuint tex;
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_1D, tex);
@@ -178,13 +178,13 @@ public:
     ~FractalFlames();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     struct DrawResources {
@@ -243,8 +243,8 @@ void FractalFlames::Run() {
 void FractalFlames::Init() {
     // window
     const int w = 800, h = 800;
-    mWindow = new Window("Fractal Flames", w, h);
-    
+    mWindow = new GLWindow("Fractal Flames", w, h);
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");
@@ -444,7 +444,7 @@ void FractalFlames::Update() {
     glBindTexture(GL_TEXTURE_1D, mPaletteTexture[mPaletteIdx]);
     glBindVertexArray(mFractalFlame.vao);
     glDrawArrays(GL_POINTS, 0, POINT_COUNT);
-    
+
     glDisable(GL_BLEND);
 
     glUseProgram(mQuad.program);

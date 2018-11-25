@@ -63,13 +63,13 @@ public:
     ~Mandelbrot();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
     void Update();
 
-    Window* mWindow;
+    GLWindow* mWindow;
     SDL_GLContext mGLContext;
 
     GLuint mVAO, mVBO, mProgram;
@@ -106,8 +106,8 @@ void Mandelbrot::Run() {
 void Mandelbrot::Init() {
     // window
     const int w = 1200, h = 800;
-    mWindow = new Window("Mandelbrot", w, h);
-    
+    mWindow = new GLWindow("Mandelbrot", w, h);
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");
