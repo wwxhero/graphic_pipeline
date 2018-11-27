@@ -16,6 +16,7 @@ void FuncLogEnd(LogItem* item)
 {
 	item->tmDurCPU = ::GetTickCount() - item->tmDurCPU;
 	printf("%20s\t%10d\t%40s\t%d\n", item->func, item->tmDurCPU, item->filePath, item->nLine);
+	//LogOut(item);
 	free(item);
 }
 
