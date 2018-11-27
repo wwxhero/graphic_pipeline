@@ -248,6 +248,42 @@ void Monkey::Init() {
     TwAddVarRW(bar, "smoothness", TW_TYPE_FLOAT, &mSmoothness, "label='Smoothness' step=1 min=8 max=256");
 
     mLastTime = SDL_GetTicks();
+
+    struct Feature {
+        GLenum cap;
+        const char* name;
+    } features[] = {
+         {GL_BLEND, "GL_BLEND"}
+        , {GL_COLOR_LOGIC_OP, "GL_COLOR_LOGIC_OP"}
+        , {GL_CULL_FACE, "GL_CULL_FACE"}
+        , {GL_DEPTH_TEST, "GL_DEPTH_TEST"}
+        , {GL_DITHER, "GL_DITHER"}
+        , {GL_LINE_SMOOTH, "GL_LINE_SMOOTH"}
+        , {GL_MULTISAMPLE, "GL_MULTISAMPLE"}
+        , {GL_POLYGON_SMOOTH, "GL_POLYGON_SMOOTH"}
+        , {GL_POLYGON_OFFSET_FILL, "GL_POLYGON_OFFSET_FILL"}
+        , {GL_POLYGON_OFFSET_LINE, "GL_POLYGON_OFFSET_LINE"}
+        , {GL_POLYGON_OFFSET_POINT, "GL_POLYGON_OFFSET_POINT"}
+        , {GL_SAMPLE_ALPHA_TO_COVERAGE, "GL_SAMPLE_ALPHA_TO_COVERAGE"}
+        , {GL_SAMPLE_ALPHA_TO_ONE, "GL_SAMPLE_ALPHA_TO_ONE"}
+        , {GL_SAMPLE_COVERAGE, "GL_SAMPLE_COVERAGE"}
+        , {GL_SCISSOR_TEST, "GL_SCISSOR_TEST"}
+        , {GL_STENCIL_TEST, "GL_STENCIL_TEST"}
+        , {GL_TEXTURE_1D, "GL_TEXTURE_1D"}
+        , {GL_TEXTURE_2D, "GL_TEXTURE_2D"}
+        , {GL_TEXTURE_3D, "GL_TEXTURE_3D"}
+        , {GL_TEXTURE_CUBE_MAP, "GL_TEXTURE_CUBE_MAP"}
+        , {GL_VERTEX_PROGRAM_POINT_SIZE, "GL_VERTEX_PROGRAM_POINT_SIZE"}
+    };
+
+    for (int i_feature = 0; i_feature < sizeof(features)/sizeof(Feature); i_feature ++)
+    {
+        GLboolean enabled = glIsEnabled(features[i_feature].cap);
+        printf("%s is %s\n", features[i_feature].name, GL_TRUE == enabled?"enabled":"disabled");
+    }
+
+
+
 }
 //-----------------------------------------------------------------------------
 bool Monkey::ProcessEvents() {
@@ -279,7 +315,7 @@ void Monkey::Update() {
 
 
     static float rotY;
-    const glm::mat4 model2world = glm::rotate(glm::degrees(rotY += 0), 0.0f, 1.0f, 0.0f);
+    const glm::mat4 model2world = glm::rotate(glm::degrees(rotY += dt), 0.0f, 1.0f, 0.0f);
     const glm::mat4 modle2clip = world2clip * model2world;
 
     glUniformMatrix4fv(glGetUniformLocation(mProgram,"Model2Clip"), 1, GL_FALSE, glm::value_ptr(modle2clip));
@@ -302,6 +338,28 @@ void Monkey::Update() {
 #endif
 
     mWindow->Swap();
+
+    struct Error
+    {
+        GLenum code;
+        const char* strInfo;
+    } error [] = {
+         { GL_NO_ERROR, "GL_NO_ERROR"}
+        ,{ GL_INVALID_ENUM , "GL_INVALID_ENUM" }
+        ,{ GL_INVALID_VALUE, "GL_INVALID_VALUE"}
+        ,{ GL_INVALID_OPERATION, "GL_INVALID_OPERATION"}
+        ,{ GL_INVALID_FRAMEBUFFER_OPERATION, "GL_INVALID_FRAMEBUFFER_OPERATION"}
+        ,{ GL_OUT_OF_MEMORY, "GL_OUT_OF_MEMORY"}
+    };
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR)
+    {
+        for (int i = 0; i < sizeof(error)/sizeof(Error); i ++)
+        {
+            if (error[i].code == err)
+                printf("Error:%s\n", error[i].strInfo);
+        }
+    }
 }
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
