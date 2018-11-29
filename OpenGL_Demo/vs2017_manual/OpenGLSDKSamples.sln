@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CasesGLTracer", "CasesGLTra
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logger", "Logger\Logger.vcxproj", "{8329ABB5-13CE-49BB-990F-1F0FA6AB03A6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testLogger", "testLogger\testLogger.vcxproj", "{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -111,6 +113,14 @@ Global
 		{8329ABB5-13CE-49BB-990F-1F0FA6AB03A6}.Release|Win32.Build.0 = Release|Win32
 		{8329ABB5-13CE-49BB-990F-1F0FA6AB03A6}.Release|x64.ActiveCfg = Release|x64
 		{8329ABB5-13CE-49BB-990F-1F0FA6AB03A6}.Release|x64.Build.0 = Release|x64
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Debug|Win32.Build.0 = Debug|Win32
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Debug|x64.ActiveCfg = Debug|x64
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Debug|x64.Build.0 = Debug|x64
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Release|Win32.ActiveCfg = Release|Win32
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Release|Win32.Build.0 = Release|Win32
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Release|x64.ActiveCfg = Release|x64
+		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
