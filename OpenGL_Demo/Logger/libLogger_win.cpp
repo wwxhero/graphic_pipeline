@@ -110,7 +110,7 @@ public:
 		m_pThresholder = (char *)malloc(c_secsize);
 		m_hFile = ::CreateFileA(szPath
 								, GENERIC_READ | GENERIC_WRITE
-								, 0
+								, FILE_SHARE_READ
 								, NULL
 								, CREATE_ALWAYS
 								, FILE_ATTRIBUTE_NORMAL|FILE_FLAG_OVERLAPPED
