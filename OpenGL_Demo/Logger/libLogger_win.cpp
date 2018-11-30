@@ -63,9 +63,17 @@ public:
 		return ret;
 	}
 
+	char* base() const
+	{
+		return c_base;
+	}
 
+	unsigned int cap() const
+	{
+		return c_cap;
+	}
 
-public:
+private:
 	char *c_base;
 	unsigned int c_cap;
 	enum {rear = 0, head};
@@ -119,7 +127,7 @@ public:
 			DumpLogInSeq();
 		::WaitForSingleObjectEx(m_aycOver.hEvent, INFINITE, TRUE); //wait till the asyc io is done
 
-		VirtualFree(m_queue.c_base, m_queue.c_cap, MEM_RELEASE);
+		VirtualFree(m_queue.base(), m_queue.cap(), MEM_RELEASE);
 		CloseHandle(m_aycOver.hEvent);
 		CloseHandle(m_hFile);
 		free(m_pThresholder);
@@ -128,7 +136,7 @@ public:
 	{
 		char logItem[2048] = {0};
 		int delta = sprintf_s(logItem
-						, "%s\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%d\tfalse\n"
+						, "%s, %d, %d, %d, %d, %d, %d, %s, %d, false\n"
 						, item->func
 						, item->tmStartCPU
 						, item->tmEndCPU
@@ -150,7 +158,7 @@ public:
 
 		while (overflow)
 		{
-			::SleepEx(30, TRUE); //yield cpu in order for the asyc routinue proceees data dump
+			::SleepEx(5, TRUE); //yield cpu in order for the asyc routinue proceees data dump
 			const char o_flag[] = "true \n";
 			unsigned int len = sizeof(o_flag) - 1;
 			char *p_flag = logItem + delta - len;
