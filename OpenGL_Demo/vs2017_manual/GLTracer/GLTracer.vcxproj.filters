@@ -35,10 +35,10 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GLTracer\libGLTracer_win.cpp">
+    <ClCompile Include="..\..\GLTracer\libGLTracer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GLTracer\libGLTracer.cpp">
+    <ClCompile Include="..\..\GLTracer\getCPUTime.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
