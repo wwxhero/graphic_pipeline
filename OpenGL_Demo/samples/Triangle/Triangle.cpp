@@ -131,7 +131,9 @@ bool Triangle::ProcessEvents() {
 //-----------------------------------------------------------------------------
 void Triangle::Update() {
     glClear(GL_COLOR_BUFFER_BIT);
+#ifdef WIN32
     glUseProgram(mProgram);
+#endif
     glBindVertexArray(mVAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     mWindow->Swap();
