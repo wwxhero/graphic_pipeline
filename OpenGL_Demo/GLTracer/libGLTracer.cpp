@@ -2,21 +2,39 @@
 #include "traceGlFuncs.cpp"
 #ifdef WIN32
 #include "stdio.h"
+#define DELIMITOR '\\'
 #else
+#define DELIMITOR '/'
 #include "malloc.h"
 #include <string.h>
 #define strcpy_s strcpy
 GLPerf thread_gl_perf;
 #endif
 extern "C" double getCPUTime();
-LogItem* FuncLogStart(const char* funcName, const char* fileName, unsigned int nLine)
+inline const char* LocateFileName(const char* filePath)
+{
+	int i_offset_delimitor = -1;
+	const char* p = filePath;
+	while (*p != '\0')
+	{
+		if (*p == DELIMITOR)
+			i_offset_delimitor = (p-filePath);
+		p ++;
+	}
+	return filePath + i_offset_delimitor + 1;
+}
+LogItem* FuncLogStart(const char* funcName, const char* filePath, unsigned int nLine)
 {
 	LogItem* item = (LogItem *)malloc(sizeof(LogItem));
 	strcpy_s(item->func, funcName);
 #ifdef SYNC_LOGGING
-	strcpy_s(item->filePath, fileName);
+	strcpy_s(item->filePath, filePath);
 #else
-	item->filePath[0] = '\0'; //don't waste space for fileName
+	const char* s_fileName = LocateFileName(filePath);
+	char* d_fileName = item->filePath;
+	for (; d_fileName < item->filePath + GL_PATH_LEN && *s_fileName != '\0'; d_fileName ++, s_fileName ++)
+		*d_fileName = *s_fileName;
+	*d_fileName = '\0';
 #endif
 	item->nLine = nLine;
 
