@@ -6,6 +6,7 @@
 #include "malloc.h"
 #include <string.h>
 #define strcpy_s strcpy
+GLPerf thread_gl_perf;
 #endif
 extern "C" double getCPUTime();
 LogItem* FuncLogStart(const char* funcName, const char* fileName, unsigned int nLine)
