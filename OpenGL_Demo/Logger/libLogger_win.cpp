@@ -27,12 +27,12 @@ public:
 		m_range[1] = 0;
 	}
 
-	unsigned int size()
+	inline unsigned int size()
 	{
 		return m_range[head] - m_range[rear];
 	}
 
-	State push_front(char* data, unsigned int len)
+	inline State push_front(char* data, unsigned int len)
 	{
 		if (len + size() > c_cap)
 			return overflow;
@@ -49,7 +49,7 @@ public:
 		}
 	}
 
-	unsigned int pop_back(char* dst, unsigned int len)
+	inline unsigned int pop_back(char* dst, unsigned int len)
 	{
 		unsigned int ret = m_range[head] - m_range[rear];
 		if (len < ret)
@@ -63,12 +63,12 @@ public:
 		return ret;
 	}
 
-	char* base() const
+	inline char* base() const
 	{
 		return c_base;
 	}
 
-	unsigned int cap() const
+	inline unsigned int cap() const
 	{
 		return c_cap;
 	}
@@ -132,7 +132,7 @@ public:
 		CloseHandle(m_hFile);
 		free(m_pThresholder);
 	}
-	void LogOut(const LogItem* item)
+	inline void LogOut(const LogItem* item)
 	{
 		char logItem[2048] = {0};
 		int delta = sprintf_s(logItem
@@ -171,7 +171,7 @@ public:
 		}
 	}
 
-	void DumpLogInSeq()
+	inline void DumpLogInSeq()
 	{
 		char *p = m_pThresholder;
 		unsigned int size = 0;

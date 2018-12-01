@@ -19,9 +19,6 @@ extern "C"
 #endif
 	_GLTRACER_API LogItem* FuncLogStart(const char* funName, const char* fileName, unsigned int nLine);
 	_GLTRACER_API void FuncLogEnd(LogItem* item);
-	_GLTRACER_API LogItem* FuncLogSyncStart(const char* funName, const char* fileName, unsigned int nLine);
-	_GLTRACER_API void FuncLogSyncEnd(LogItem* item);
-
 	#include "traceGlFuncs.h"
 #ifdef __cplusplus
 }
