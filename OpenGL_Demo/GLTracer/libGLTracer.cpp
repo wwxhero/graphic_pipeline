@@ -1,6 +1,8 @@
 #include "libGLTracer.h"
 #include "traceGlFuncs.cpp"
-#ifndef WIN32
+#ifdef WIN32
+#include "stdio.h"
+#else
 #include "malloc.h"
 #include <string.h>
 #define strcpy_s strcpy
