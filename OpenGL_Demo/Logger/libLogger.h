@@ -1,6 +1,8 @@
 #pragma once
 #ifdef WIN32
 #include <windows.h>
+#else
+#include <unistd.h>
 #endif
 #ifndef _LIBLOGGER_
 #define _LIBLOGGER_

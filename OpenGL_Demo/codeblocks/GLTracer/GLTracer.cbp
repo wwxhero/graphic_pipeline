@@ -15,6 +15,9 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../samples/external" />
+					<Add directory="../../samples/common" />
+					<Add directory="../../Logger" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -35,9 +38,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-fPIC" />
+			<Add option="-DSYNC_LOGGING" />
 		</Compiler>
+		<Unit filename="../../GLTracer/libGLTracer.cpp" />
 		<Unit filename="../../GLTracer/libGLTracer.h" />
-		<Unit filename="../../GLTracer/libGLTracer_lin.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

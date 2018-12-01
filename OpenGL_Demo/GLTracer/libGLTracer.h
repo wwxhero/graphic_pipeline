@@ -133,8 +133,11 @@ public:
 	GLuint tls_gpu_couter_id;
 	PFNGLDELETEQUERIESPROC glDeleteQueries;
 };
-
+#ifdef WIN32
 __declspec(thread) GLPerf thread_gl_perf;
+#else
+extern GLPerf thread_gl_perf; //fixme: only supports a single thread in this way
+#endif // WIN32
 
 #ifndef GLTRACE_SYNC_0
 #define GLTRACE_SYNC_0(func)\

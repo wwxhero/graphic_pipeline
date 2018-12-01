@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1541297641 source:/home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/samples/Triangle/Triangle.cpp
+1543685686 source:/home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/samples/Triangle/Triangle.cpp
 	"Common.hpp"
 	<stdexcept>
 	"libGLTracer.h"
@@ -666,5 +666,14 @@
 
 1537242290 /home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/samples/external/stbi/stb_image_write.h
 
-1541287205 /home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/GLTracer/libGLTracer.h
+1543686378 /home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/GLTracer/libGLTracer.h
+	"OpenGL.hpp"
+	"libLogger.h"
+	"traceGlFuncs.h"
+
+1543686725 /home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/Logger/libLogger.h
+	<windows.h>
+	<unistd.h>
+
+1543686051 /home/wwxhero/advanced_OS/graphic_pipeline/OpenGL_Demo/GLTracer/traceGlFuncs.h
 
