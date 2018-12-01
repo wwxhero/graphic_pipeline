@@ -90,66 +90,162 @@ extern "C"
 	}
 #endif
 
+class GLPerf
+{
+public:
+	GLPerf() : tls_gpu_couter_id(GL_INVALID_INDEX)
+		, glDeleteQueries(NULL)
+	{
+	}
+	~GLPerf()
+	{
+		if (GL_INVALID_INDEX != tls_gpu_couter_id)
+			glDeleteQueries(1, &tls_gpu_couter_id);
+	}
+public:
+	GLuint tls_gpu_couter_id;
+	PFNGLDELETEQUERIESPROC glDeleteQueries;
+};
+
+__declspec(thread) GLPerf thread_gl_perf;
+
 #ifndef GLTRACE_SYNC_0
 #define GLTRACE_SYNC_0(func)\
 	{\
-		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		LogItem* item = FuncLogStart("Sync", __FILE__, __LINE__);\
+		if (GL_INVALID_INDEX == thread_gl_perf.tls_gpu_couter_id)\
+		{\
+			glGenQueries(1, &thread_gl_perf.tls_gpu_couter_id);\
+			thread_gl_perf.glDeleteQueries = glDeleteQueries;\
+		}\
+		else\
+		{\
+			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
+		}\
 		func();\
-		FuncLogSyncEnd(item);\
+		glBeginQuery(GL_TIME_ELAPSED, thread_gl_perf.tls_gpu_couter_id);\
+		FuncLogEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_1
 #define GLTRACE_SYNC_1(func, p1)\
 	{\
-		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		LogItem* item = FuncLogStart("Sync", __FILE__, __LINE__);\
+		if (GL_INVALID_INDEX == thread_gl_perf.tls_gpu_couter_id)\
+		{\
+			glGenQueries(1, &thread_gl_perf.tls_gpu_couter_id);\
+			thread_gl_perf.glDeleteQueries = glDeleteQueries;\
+		}\
+		else\
+		{\
+			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
+		}\
 		func(p1);\
-		FuncLogSyncEnd(item);\
+		glBeginQuery(GL_TIME_ELAPSED, thread_gl_perf.tls_gpu_couter_id);\
+		FuncLogEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_2
 #define GLTRACE_SYNC_2(func, p1, p2)\
 	{\
-		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		LogItem* item = FuncLogStart("Sync", __FILE__, __LINE__);\
+		if (GL_INVALID_INDEX == thread_gl_perf.tls_gpu_couter_id)\
+		{\
+			glGenQueries(1, &thread_gl_perf.tls_gpu_couter_id);\
+			thread_gl_perf.glDeleteQueries = glDeleteQueries;\
+		}\
+		else\
+		{\
+			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
+		}\
 		func(p1, p2);\
-		FuncLogSyncEnd(item);\
+		glBeginQuery(GL_TIME_ELAPSED, thread_gl_perf.tls_gpu_couter_id);\
+		FuncLogEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_3
 #define GLTRACE_SYNC_3(func, p1, p2, p3)\
 	{\
-		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		LogItem* item = FuncLogStart("Sync", __FILE__, __LINE__);\
+		if (GL_INVALID_INDEX == thread_gl_perf.tls_gpu_couter_id)\
+		{\
+			glGenQueries(1, &thread_gl_perf.tls_gpu_couter_id);\
+			thread_gl_perf.glDeleteQueries = glDeleteQueries;\
+		}\
+		else\
+		{\
+			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
+		}\
 		func(p1, p2, p3);\
-		FuncLogSyncEnd(item);\
+		glBeginQuery(GL_TIME_ELAPSED, thread_gl_perf.tls_gpu_couter_id);\
+		FuncLogEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_4
 #define GLTRACE_SYNC_4(func, p1, p2, p3, p4)\
 	{\
-		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		LogItem* item = FuncLogStart("Sync", __FILE__, __LINE__);\
+		if (GL_INVALID_INDEX == thread_gl_perf.tls_gpu_couter_id)\
+		{\
+			glGenQueries(1, &thread_gl_perf.tls_gpu_couter_id);\
+			thread_gl_perf.glDeleteQueries = glDeleteQueries;\
+		}\
+		else\
+		{\
+			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
+		}\
 		func(p1, p2, p3, p4);\
-		FuncLogSyncEnd(item);\
+		glBeginQuery(GL_TIME_ELAPSED, thread_gl_perf.tls_gpu_couter_id);\
+		FuncLogEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_5
 #define GLTRACE_SYNC_5(func, p1, p2, p3, p4, p5)\
 	{\
-		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		LogItem* item = FuncLogStart("Sync", __FILE__, __LINE__);\
+		if (GL_INVALID_INDEX == thread_gl_perf.tls_gpu_couter_id)\
+		{\
+			glGenQueries(1, &thread_gl_perf.tls_gpu_couter_id);\
+			thread_gl_perf.glDeleteQueries = glDeleteQueries;\
+		}\
+		else\
+		{\
+			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
+		}\
 		func(p1, p2, p3, p4, p5);\
-		FuncLogSyncEnd(item);\
+		glBeginQuery(GL_TIME_ELAPSED, thread_gl_perf.tls_gpu_couter_id);\
+		FuncLogEnd(item);\
 	}
 #endif
 
 #ifndef GLTRACE_SYNC_6
 #define GLTRACE_SYNC_6(func, p1, p2, p3, p4, p5, p6)\
 	{\
-		LogItem* item = FuncLogSyncStart("Sync", __FILE__, __LINE__);\
+		LogItem* item = FuncLogStart("Sync", __FILE__, __LINE__);\
+		if (GL_INVALID_INDEX == thread_gl_perf.tls_gpu_couter_id)\
+		{\
+			glGenQueries(1, &thread_gl_perf.tls_gpu_couter_id);\
+			thread_gl_perf.glDeleteQueries = glDeleteQueries;\
+		}\
+		else\
+		{\
+			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
+		}\
 		func(p1, p2, p3, p4, p5, p6);\
-		FuncLogSyncEnd(item);\
+		glBeginQuery(GL_TIME_ELAPSED, thread_gl_perf.tls_gpu_couter_id);\
+		FuncLogEnd(item);\
 	}
 #endif
 

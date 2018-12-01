@@ -37,16 +37,3 @@ void FuncLogEnd(LogItem* item)
 #endif
 	free(item);
 }
-
-LogItem* FuncLogSyncStart(const char* funcName, const char* fileName, unsigned int nLine)
-{
-	LogItem* item = FuncLogStart(funcName, fileName, nLine);
-	//fixme: collect GPU executing time since previous swap
-	return item;
-}
-
-void FuncLogSyncEnd(LogItem* item)
-{
-	//fixme: leave GPU time stamp for next swap
-	FuncLogEnd(item);
-}
