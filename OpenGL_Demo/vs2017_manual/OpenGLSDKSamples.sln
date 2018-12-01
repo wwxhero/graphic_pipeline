@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logger", "Logger\Logger.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testLogger", "testLogger\testLogger.vcxproj", "{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracerCPU", "RaytracerCPU\RaytracerCPU.vcxproj", "{3928BACF-B3F4-4942-BA12-CB3DA1823D43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -121,6 +123,14 @@ Global
 		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Release|Win32.Build.0 = Release|Win32
 		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Release|x64.ActiveCfg = Release|x64
 		{7F0A371B-0B69-4E8E-B61F-6006BD004FCD}.Release|x64.Build.0 = Release|x64
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Debug|Win32.Build.0 = Debug|Win32
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Debug|x64.ActiveCfg = Debug|x64
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Debug|x64.Build.0 = Debug|x64
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Release|Win32.ActiveCfg = Release|Win32
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Release|Win32.Build.0 = Release|Win32
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Release|x64.ActiveCfg = Release|x64
+		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
