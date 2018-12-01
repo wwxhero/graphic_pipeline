@@ -90,6 +90,33 @@ extern "C"
 	}
 #endif
 
+#ifndef GLTRACE_VOID_7
+#define GLTRACE_VOID_7(func, p1, p2, p3, p4, p5, p6, p7)\
+	{\
+		LogItem* item = FuncLogStart(#func, __FILE__, __LINE__);\
+		func(p1, p2, p3, p4, p5, p6, p7);\
+		FuncLogEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_VOID_8
+#define GLTRACE_VOID_8(func, p1, p2, p3, p4, p5, p6, p7, p8)\
+	{\
+		LogItem* item = FuncLogStart(#func, __FILE__, __LINE__);\
+		func(p1, p2, p3, p4, p5, p6, p7, p8);\
+		FuncLogEnd(item);\
+	}
+#endif
+
+#ifndef GLTRACE_VOID_9
+#define GLTRACE_VOID_9(func, p1, p2, p3, p4, p5, p6, p7, p8, p9)\
+	{\
+		LogItem* item = FuncLogStart(#func, __FILE__, __LINE__);\
+		func(p1, p2, p3, p4, p5, p6, p7, p8, p9);\
+		FuncLogEnd(item);\
+	}
+#endif
+
 class GLPerf
 {
 public:

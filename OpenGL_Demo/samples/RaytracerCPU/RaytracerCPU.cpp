@@ -2,11 +2,11 @@
 // For the latest info, see http://es.g0dsoft.com/
 // Copyright (c) 2010 Michal Ziulek
 // This source is under MIT License
-#define TW_STATIC
 #include "Common.hpp"
 #include <stdexcept>
 #include <limits>
 #include <vector>
+#include "libGLTracer.h"
 using namespace std;
 
 //-----------------------------------------------------------------------------
@@ -339,7 +339,7 @@ void RaytracerCPU::Update() {
     // draw GUI
     glUseProgram(0);
     glBindVertexArray(0);
-    TwDraw();
+    //TwDraw();
 
     mWindow->Swap();
 }
@@ -388,7 +388,7 @@ glm::vec3 RaytracerCPU::Shade(const Ray& ray, const Primitive& prim, const glm::
         IntersectAll(shadowRay, dist);
 
         if (glm::length(lightVec) < dist) {
-            const float d = prim.GetDiffuse() * glm::max(glm::dot(n, l), 0.0f);
+            const float d = prim.GetDiffuse() * max(glm::dot(n, l), 0.0f);
             color += d * prim.GetColor() * mLight[i]->GetColor();
         }
     }
