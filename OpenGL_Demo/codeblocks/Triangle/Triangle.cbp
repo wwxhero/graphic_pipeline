@@ -14,13 +14,14 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../../GLTracer" />
+					<Add directory="../../Logger" />
 					<Add directory="../../samples/external" />
 					<Add directory="../../samples/common" />
 					<Add directory="../../samples/external/stbi" />
 					<Add directory="../../samples/external/AntTweakBar/include" />
 					<Add directory="../../samples/external/glm" />
 					<Add directory="/usr/include/SDL2" />
-					<Add directory="../../GLTracer" />
 				</Compiler>
 				<Linker>
 					<Add library="GLTracer" />
