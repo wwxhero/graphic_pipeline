@@ -219,7 +219,7 @@ void RaytracerGPU::Init() {
     SDL_GL_SetSwapInterval(0);
 
     // load OpenGL 3.0 functions
-    gl::LoadCommandPointers(30);
+    gl::LoadCommandPointers(33);
 
     // program
     mProgram = gl::BuildProgram(Vsh(), Fsh());
