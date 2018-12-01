@@ -120,7 +120,7 @@ __declspec(thread) GLPerf thread_gl_perf;
 		}\
 		else\
 		{\
-			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glEndQuery(GL_TIME_ELAPSED);\
 			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
 		}\
 		func();\
@@ -140,7 +140,7 @@ __declspec(thread) GLPerf thread_gl_perf;
 		}\
 		else\
 		{\
-			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glEndQuery(GL_TIME_ELAPSED);\
 			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
 		}\
 		func(p1);\
@@ -160,7 +160,7 @@ __declspec(thread) GLPerf thread_gl_perf;
 		}\
 		else\
 		{\
-			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glEndQuery(GL_TIME_ELAPSED);\
 			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
 		}\
 		func(p1, p2);\
@@ -180,7 +180,7 @@ __declspec(thread) GLPerf thread_gl_perf;
 		}\
 		else\
 		{\
-			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glEndQuery(GL_TIME_ELAPSED);\
 			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
 		}\
 		func(p1, p2, p3);\
@@ -200,7 +200,7 @@ __declspec(thread) GLPerf thread_gl_perf;
 		}\
 		else\
 		{\
-			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glEndQuery(GL_TIME_ELAPSED);\
 			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
 		}\
 		func(p1, p2, p3, p4);\
@@ -220,7 +220,7 @@ __declspec(thread) GLPerf thread_gl_perf;
 		}\
 		else\
 		{\
-			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glEndQuery(GL_TIME_ELAPSED);\
 			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
 		}\
 		func(p1, p2, p3, p4, p5);\
@@ -240,7 +240,7 @@ __declspec(thread) GLPerf thread_gl_perf;
 		}\
 		else\
 		{\
-			glEndQuery(thread_gl_perf.tls_gpu_couter_id);\
+			glEndQuery(GL_TIME_ELAPSED);\
 			glGetQueryObjectiv(thread_gl_perf.tls_gpu_couter_id, GL_QUERY_RESULT, (GLint*)&item->tmDurGPU);\
 		}\
 		func(p1, p2, p3, p4, p5, p6);\
