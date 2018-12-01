@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testLogger", "testLogger\te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracerCPU", "RaytracerCPU\RaytracerCPU.vcxproj", "{3928BACF-B3F4-4942-BA12-CB3DA1823D43}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracerGPU", "RaytracerGPU\RaytracerGPU.vcxproj", "{E87F51C5-EE46-452C-BB1C-328B41899FC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -131,6 +133,14 @@ Global
 		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Release|Win32.Build.0 = Release|Win32
 		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Release|x64.ActiveCfg = Release|x64
 		{3928BACF-B3F4-4942-BA12-CB3DA1823D43}.Release|x64.Build.0 = Release|x64
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Debug|Win32.Build.0 = Debug|Win32
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Debug|x64.ActiveCfg = Debug|x64
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Debug|x64.Build.0 = Debug|x64
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Release|Win32.ActiveCfg = Release|Win32
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Release|Win32.Build.0 = Release|Win32
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Release|x64.ActiveCfg = Release|x64
+		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

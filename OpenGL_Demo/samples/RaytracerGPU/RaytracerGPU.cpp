@@ -5,6 +5,7 @@
 
 #include "Common.hpp"
 #include <stdexcept>
+#include "libGLTracer.h"
 using namespace std;
 
 //-----------------------------------------------------------------------------
