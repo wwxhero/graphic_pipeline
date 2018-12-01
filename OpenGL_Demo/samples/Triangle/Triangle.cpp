@@ -55,9 +55,9 @@ private:
 };
 //-----------------------------------------------------------------------------
 Triangle::~Triangle() {
-    glDeleteVertexArrays(1, &mVAO);
-    glDeleteBuffers(1, &mVBO);
-    glDeleteProgram(mProgram);
+    GLTRACE_VOID_2(glDeleteVertexArrays, 1, &mVAO);
+    GLTRACE_VOID_2(glDeleteBuffers, 1, &mVBO);
+    GLTRACE_VOID_1(glDeleteProgram, mProgram);
     SDL_GL_DeleteContext(mGLContext);
     delete mWindow;
 }
@@ -88,8 +88,8 @@ void Triangle::Init() {
     const GLuint c_idxPos = 0;
     const GLuint c_idxClr = 1;
     mProgram = gl::BuildProgram(Vsh(), Fsh(), false);
-    glBindAttribLocation(mProgram, c_idxPos, "Position");
-    glBindAttribLocation(mProgram, c_idxClr, "ColorIn");
+    GLTRACE_VOID_3(glBindAttribLocation, mProgram, c_idxPos, "Position");
+    GLTRACE_VOID_3(glBindAttribLocation, mProgram, c_idxClr, "ColorIn");
     gl::LinkProgram(mProgram);
 
     // create Vertex Buffer Object (VBO)
@@ -98,21 +98,21 @@ void Triangle::Init() {
                         ,   1, -1, 0, 1, 0
                         ,   0,  1, 0, 0, 1 };
 
-    glGenVertexArrays(1, &mVAO);
-    glBindVertexArray(mVAO);
+    GLTRACE_VOID_2(glGenVertexArrays, 1, &mVAO);
+    GLTRACE_VOID_1(glBindVertexArray, mVAO);
 
-    glGenBuffers(1, &mVBO);
-    glBindBuffer(GL_ARRAY_BUFFER, mVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(data), data, GL_STATIC_DRAW);
+    GLTRACE_VOID_2(glGenBuffers, 1, &mVBO);
+    GLTRACE_VOID_2(glBindBuffer, GL_ARRAY_BUFFER, mVBO);
+    GLTRACE_VOID_4(glBufferData, GL_ARRAY_BUFFER, sizeof(data), data, GL_STATIC_DRAW);
 
     // create Vertex Array Object (VAO)
     const GLsizei stride = 5 * sizeof(float);
 
-    glVertexAttribPointer(c_idxPos, 2, GL_FLOAT, GL_FALSE, stride, 0);
-    glEnableVertexAttribArray(c_idxPos);
+    GLTRACE_VOID_6(glVertexAttribPointer, c_idxPos, 2, GL_FLOAT, GL_FALSE, stride, 0);
+    GLTRACE_VOID_1(glEnableVertexAttribArray, c_idxPos);
 
-    glVertexAttribPointer(c_idxClr, 3, GL_FLOAT, GL_FALSE, stride, (void*)(2*sizeof(float)));
-    glEnableVertexAttribArray(c_idxClr);
+    GLTRACE_VOID_6(glVertexAttribPointer, c_idxClr, 3, GL_FLOAT, GL_FALSE, stride, (void*)(2*sizeof(float)));
+    GLTRACE_VOID_1(glEnableVertexAttribArray, c_idxClr);
 
 }
 //-----------------------------------------------------------------------------
@@ -130,13 +130,13 @@ bool Triangle::ProcessEvents() {
 }
 //-----------------------------------------------------------------------------
 void Triangle::Update() {
-    glClear(GL_COLOR_BUFFER_BIT);
+    GLTRACE_VOID_1(glClear, GL_COLOR_BUFFER_BIT);
 #ifdef WIN32
-    glUseProgram(mProgram);
+    GLTRACE_VOID_1(glUseProgram, mProgram);
 #endif
-    glBindVertexArray(mVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    mWindow->Swap();
+    GLTRACE_VOID_1(glBindVertexArray, mVAO);
+    GLTRACE_VOID_3(glDrawArrays, GL_TRIANGLES, 0, 3);
+    GLTRACE_SYNC_0(mWindow->Swap);
     struct Error
     {
         GLenum code;
@@ -149,7 +149,7 @@ void Triangle::Update() {
         ,{ GL_INVALID_FRAMEBUFFER_OPERATION, "GL_INVALID_FRAMEBUFFER_OPERATION"}
         ,{ GL_OUT_OF_MEMORY, "GL_OUT_OF_MEMORY"}
     };
-    GLenum err = glGetError();
+    GLenum err = GLTRACE_RET_0(glGetError);
     if (err != GL_NO_ERROR)
     {
         for (int i = 0; i < sizeof(error)/sizeof(Error); i ++)
