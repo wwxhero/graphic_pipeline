@@ -18,35 +18,38 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\samples\RaytracerGPU\RaytracerGPU.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{BA1CBD1B-E264-41A2-8308-55C259AE73B4}</ProjectGuid>
+    <ProjectGuid>{E87F51C5-EE46-452C-BB1C-328B41899FC5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>AntTweakBarStatic</RootNamespace>
+    <RootNamespace>RaytracerGPU</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -72,14 +75,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>debug32\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>release32\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -90,27 +91,30 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;TW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\samples\external\AntTweakBar\src;..\..\samples\external\AntTweakBar\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>TwPrecomp.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;..\..\GLTracer;..\..\Logger</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>AntTweakBarStatic.lib;common.lib;stbi.lib;..\..\dependencies\lib\SDL.lib;GLTracer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -119,85 +123,42 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;TW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;TW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\samples\external\AntTweakBar\src;..\..\samples\external\AntTweakBar\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>TwPrecomp.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\..\dependencies\include\SDL;..\..\samples\external;..\..\samples\common;..\..\samples\external\AntTweakBar\include;..\..\samples\external\stbi;..\..\samples\external\glm;..\..\GLTracer;..\..\Logger</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>AntTweakBarStatic.lib;common.lib;stbi.lib;..\..\dependencies\lib\SDL.lib;GLTracer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\samples\external\AntTweakBar\include\AntTweakBar.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\AntPerfTimer.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\d3d10vs2003.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\LoadOGL.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\LoadOGLCore.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\MiniGLFW.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\MiniGLUT.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\MiniSDL12.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\MiniSDL13.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\MiniSFML16.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\resource.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwColors.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwDirect3D10.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwDirect3D11.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwDirect3D9.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwFonts.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwGraph.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwMgr.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwOpenGL.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwOpenGLCore.h" />
-    <ClInclude Include="..\..\samples\external\AntTweakBar\src\TwPrecomp.h" />
-    <ClInclude Include="targetver.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\LoadOGL.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\LoadOGLCore.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwBar.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwColors.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwDirect3D10.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwDirect3D11.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwDirect3D9.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwEventGLFW.c" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwEventGLUT.c" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwEventSDL.c" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwEventSDL12.c" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwEventSDL13.c" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwEventSFML.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwEventWin.c" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwFonts.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwMgr.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwOpenGL.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwOpenGLCore.cpp" />
-    <ClCompile Include="..\..\samples\external\AntTweakBar\src\TwPrecomp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\..\samples\external\AntTweakBar\src\AntTweakBar.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
