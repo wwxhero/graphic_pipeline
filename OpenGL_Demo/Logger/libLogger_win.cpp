@@ -136,7 +136,7 @@ public:
 	{
 		char logItem[2048] = {0};
 		int delta = sprintf_s(logItem
-						, "%s, %d, %d, %d, %d, %d, %d, %s, %d, false\n"
+						, "%s, %u, %u, %u, %u, %u, %u, %s, %u, false\n"
 						, item->func
 						, item->tmStartCPU
 						, item->tmEndCPU
