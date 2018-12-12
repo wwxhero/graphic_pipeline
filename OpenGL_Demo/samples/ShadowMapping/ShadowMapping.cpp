@@ -342,7 +342,8 @@ void ShadowMapping::Init() {
     mCameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
     mCameraRotX = mCameraRotY = 0;
 
-    glGetUniformfv(mProgram, glGetUniformLocation(mProgram, "LightDir"), glm::value_ptr(mLightDir));
+    GLint ptrLightDir = glGetUniformLocation(mProgram, "LightDir");
+    glGetUniformfv(mProgram, ptrLightDir, glm::value_ptr(mLightDir));
 
     // create shadow map
     glGenTextures(1, &mShadowMap);
@@ -435,14 +436,18 @@ void ShadowMapping::DrawObjects(const glm::mat4& projView, bool shadowPass) {
         if (shadowPass) {
             glUseProgram(mShadowProgram);
             const glm::mat4 pvw = projView * obj.worldMatrix;
-            glUniformMatrix4fv(glGetUniformLocation(mShadowProgram, "ProjViewWorldMatrix"), 1, GL_FALSE, &pvw[0][0]);
+            GLint ptrProjViewworldMatrix = glGetUniformLocation(mShadowProgram, "ProjViewWorldMatrix");
+            glUniformMatrix4fv(ptrProjViewworldMatrix, 1, GL_FALSE, &pvw[0][0]);
         }
         else {
             glUseProgram(mProgram);
             const glm::mat4 pvw = projView * obj.worldMatrix;
-            glUniformMatrix4fv(glGetUniformLocation(mProgram, "ProjViewWorldMatrix"), 1, GL_FALSE, &pvw[0][0]);
-            glUniformMatrix4fv(glGetUniformLocation(mProgram, "WorldMatrix"), 1, GL_FALSE, &obj.worldMatrix[0][0]);
-            glUniform3fv(glGetUniformLocation(mProgram, "SurfaceDiffuse"), 1, glm::value_ptr(obj.diffuseColor * 1.0f / 3.1415926f));
+            GLint ptrProjViewworldMatrix = glGetUniformLocation(mProgram, "ProjViewWorldMatrix");
+			GLint ptrWorldMatrix = glGetUniformLocation(mProgram, "WorldMatrix");
+			GLint ptrSurfaceDiffuse = glGetUniformLocation(mProgram, "SurfaceDiffuse");
+            glUniformMatrix4fv(ptrProjViewworldMatrix, 1, GL_FALSE, &pvw[0][0]);
+            glUniformMatrix4fv(ptrWorldMatrix, 1, GL_FALSE, &obj.worldMatrix[0][0]);
+            glUniform3fv(ptrSurfaceDiffuse, 1, glm::value_ptr(obj.diffuseColor * 1.0f / 3.1415926f));
         }
 
         obj.mesh->Bind();
@@ -482,7 +487,8 @@ void ShadowMapping::UpdateCamera(float dt) {
 void ShadowMapping::PutLight() {
     glUseProgram(mProgram);
     mLightDir = mCameraPos;
-    glUniform3fv(glGetUniformLocation(mProgram, "LightDir"), 1, glm::value_ptr(mLightDir));
+	GLint ptrLightDir = glGetUniformLocation(mProgram, "LightDir");
+    glUniform3fv(ptrLightDir, 1, glm::value_ptr(mLightDir));
 }
 //-----------------------------------------------------------------------------
 void ShadowMapping::PutLightCB(void* demoPtr) {
