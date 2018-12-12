@@ -163,7 +163,7 @@ private:
 //-----------------------------------------------------------------------------
 Mesh::Mesh(const char* filename) {
     MeshLoader meshLoader(filename);
-    
+
     glGenVertexArrays(1, &mVAO);
     glBindVertexArray(mVAO);
 
@@ -222,7 +222,7 @@ public:
     ~ShadowMapping();
 
     void Run();
-    
+
 private:
     void Init();
     bool ProcessEvents();
@@ -238,7 +238,7 @@ private:
     SDL_GLContext mGLContext;
 
     vector<Object> mObjectList;
-    
+
     GLuint mProgram;
     GLuint mShadowProgram;
 
@@ -280,7 +280,7 @@ void ShadowMapping::Init() {
     // window
     mWinWidth = 800, mWinHeight = 800;
     mWindow = new GLWindow("Shadow Mapping", mWinWidth, mWinHeight);
-    
+
     // context
     if (!(mGLContext = SDL_GL_CreateContext(mWindow->Get()))) {
         throw runtime_error("SDL_GL_CreateContext failed");
@@ -288,8 +288,8 @@ void ShadowMapping::Init() {
 
     SDL_GL_SetSwapInterval(0);
 
-    // load OpenGL 3.0 functions
-    gl::LoadCommandPointers(30);
+    // load OpenGL 3.3 functions
+    gl::LoadCommandPointers(33);
 
     TwInit(TW_OPENGL, NULL);
     TwWindowSize(mWinWidth, mWinHeight);
@@ -312,11 +312,11 @@ void ShadowMapping::Init() {
 
     // create shadow program
     mShadowProgram = gl::BuildProgram(VshShadow(), FshShadow());
-    
+
     // create scene
     mMonkeyMesh = new Mesh("../../media/monkey.ply");
     mGroundMesh = new Mesh("../../media/ground.ply");
-    
+
     Object obj;
     obj.mesh = mMonkeyMesh;
     obj.diffuseColor = glm::vec3(0.9f, 0.5f, 1);
@@ -342,7 +342,7 @@ void ShadowMapping::Init() {
     mCameraRotX = mCameraRotY = 0;
 
     glGetUniformfv(mProgram, glGetUniformLocation(mProgram, "LightDir"), glm::value_ptr(mLightDir));
-    
+
     // create shadow map
     glGenTextures(1, &mShadowMap);
     glBindTexture(GL_TEXTURE_2D, mShadowMap);
@@ -403,7 +403,9 @@ void ShadowMapping::Update() {
     glUseProgram(mProgram);
     glm::mat4 shadowMatrix =
         glm::translate(0.5f, 0.5f, 0.5f) * glm::scale(glm::vec3(0.5f)) * lightProjView;
-    glUniformMatrix4fv(glGetUniformLocation(mProgram, "ShadowMatrix"), 1, GL_FALSE, &shadowMatrix[0][0]);
+    GLint ptrShadowMatrix = glGetUniformLocation(mProgram, "ShadowMatrix");
+    if (-1 != ptrShadowMatrix)
+        glUniformMatrix4fv(ptrShadowMatrix, 1, GL_FALSE, &shadowMatrix[0][0]);
 
     // normal pass (draw scene from camera point of view)
     const glm::mat4 projView =

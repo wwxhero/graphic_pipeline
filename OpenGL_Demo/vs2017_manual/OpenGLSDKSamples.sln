@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracerCPU", "RaytracerCP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracerGPU", "RaytracerGPU\RaytracerGPU.vcxproj", "{E87F51C5-EE46-452C-BB1C-328B41899FC5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowMapping", "ShadowMapping\ShadowMapping.vcxproj", "{DEDE36AB-A267-41DE-BD36-457711EF7DB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -141,6 +143,14 @@ Global
 		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Release|Win32.Build.0 = Release|Win32
 		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Release|x64.ActiveCfg = Release|x64
 		{E87F51C5-EE46-452C-BB1C-328B41899FC5}.Release|x64.Build.0 = Release|x64
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Debug|Win32.Build.0 = Debug|Win32
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Debug|x64.ActiveCfg = Debug|x64
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Debug|x64.Build.0 = Debug|x64
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Release|Win32.ActiveCfg = Release|Win32
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Release|Win32.Build.0 = Release|Win32
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Release|x64.ActiveCfg = Release|x64
+		{DEDE36AB-A267-41DE-BD36-457711EF7DB3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
