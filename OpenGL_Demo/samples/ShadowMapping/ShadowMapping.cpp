@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <vector>
 #include <cstdio>
+#include "libGLTracer.h"
 using namespace std;
 
 //-----------------------------------------------------------------------------
