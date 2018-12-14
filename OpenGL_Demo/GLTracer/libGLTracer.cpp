@@ -40,11 +40,10 @@ LogItem* FuncLogStart(const char* funcName, const char* filePath, unsigned int n
 
 #ifdef WIN32
 	item->tmStartCPU = ::GetTickCount();
-	item->tmEndCPU = ::GetTickCount();
+	item->tmEndCPU = 0;
 	item->tmDurGPU = 0;
 	item->idThread = GetCurrentThreadId();
 	item->idProcess = GetCurrentProcessId();
-	item->tmDurCPU = ::GetTickCount(); //fixme: may require more accurate function fot time record
 #else
     //fixme: linux implementation for collecting CPU time is not yet implemented
 #endif
@@ -54,7 +53,8 @@ LogItem* FuncLogStart(const char* funcName, const char* filePath, unsigned int n
 void FuncLogEnd(LogItem* item)
 {
 #ifdef WIN32
-	item->tmDurCPU = ::GetTickCount() - item->tmDurCPU;
+	item->tmEndCPU = ::GetTickCount();
+	item->tmDurCPU = item->tmEndCPU - item->tmStartCPU;
 #endif
 
 #ifdef SYNC_LOGGING
