@@ -1,4 +1,4 @@
-LogRaw = csvread('shadowmapping_matlab.csv');
+LogRaw = csvread('Monkey_matlab.csv');
 [M, N] = size(LogRaw);
 idx_frame = find(LogRaw(:,4)>0);
 [M_prime,~] = size(idx_frame);
@@ -14,12 +14,13 @@ end
 
 FrameCnt = 1:M_prime;
 CPUStart = LogFrame(:,1)';
-h_deri = 0.5 * [-1 0 1];
-CPUStart_deri = imfilter(CPUStart, h_deri, 'replicate');
-SycDur = zeros(1, M_prime);
-SycDur(1, 1) = 0;
-SycDur(1, 2:M_prime) = LogFrame(1:M_prime-1, 3)';
-%CPUStart_deri = CPUStart_deri - SycDur;
+h_deri = [-1 0 1];
+CPUStart_deri2 = imfilter(CPUStart, h_deri, 'replicate');
+SycDur = LogFrame(1:M_prime, 3)';
+h_cnn = [1 1 0];
+SynDur2 = imfilter(SycDur, h_cnn, 'replicate');
+CPUStart_deri = 0.5*(CPUStart_deri2 - SynDur2);
+
 figure
 subplot(2, 2, 1), plot(FrameCnt, CPUStart);
 CPUDur = CPUStart(1, M_prime) - CPUStart(1, 1);
@@ -28,27 +29,27 @@ fps = round(n_frame/CPUDur*1000);
 strTitle = sprintf('average fps = %d', fps);
 title(strTitle);
 xlabel('frame count'), ylabel('cpu time');
-subplot(2, 2, 2), plot(FrameCnt, CPUStart_deri);
+subplot(2, 2, 2), plot(FrameCnt, CPUStart_deri, 'r');
 strMean = sprintf('mean = %f', mean(CPUStart_deri));
 strStd = sprintf('standard divation = %f', std(CPUStart_deri));
-title({'derivative of cpu time against frame count', ...
+title({'derivative of cpu time against frame number', ...
 		strMean, ...
 		strStd});
-xlabel('frame count'), ylabel('cpu time');
+xlabel('frame number'), ylabel('cpu time');
 
 GPUStart_deri = (LogFrame(:,4)/1000000)';
-subplot(2, 2, 3), plot(FrameCnt, GPUStart_deri);
+subplot(2, 2, 3), plot(FrameCnt, GPUStart_deri, 'b');
 strMean = sprintf('mean = %f', mean(GPUStart_deri));
 strStd = sprintf('standard divation = %f', std(GPUStart_deri));
-title({'derivative of gpu time against frame count', ...
+title({'derivative of gpu time against frame number', ...
 	strMean,...
 	strStd});
-xlabel('frame count'), ylabel('gpu time');
+xlabel('frame number'), ylabel('gpu time');
 
 
 subplot(2, 2, 4), plot(FrameCnt, CPUStart_deri, 'r', ...
             FrameCnt, GPUStart_deri, 'b');
-title({'derivative of cpu time against frame count (red)', ...
-	'derivative of gpu time against frame count (blue)'});
-xlabel('frame count'), ylabel('time');
+title({'derivative of cpu time against frame number (red)', ...
+	'derivative of gpu time against frame number (blue)'});
+xlabel('frame number'), ylabel('time');
 
