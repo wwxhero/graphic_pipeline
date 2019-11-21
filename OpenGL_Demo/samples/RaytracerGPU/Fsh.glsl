@@ -1,7 +1,6 @@
 #version 130
-#line 41 /* "d:\\users\\wanxwang\\advanced_os\\graphic_pipeline\\opengl_demo\\samples\\raytracergpu\\raytracergpu.cpp" */
 #define _DEBUG
-uniform mat4 View;
+uniform mat4 view2world;
 uniform float Time;
 out vec4 Color;
 
@@ -90,7 +89,7 @@ int IntersectObject(vec3 rO, vec3 rD, out float d) {
     return minObject;
 }
 
-vec3 Shade(vec3 rO, vec3 rD, int object, vec3 p, vec3 n) {
+vec3 Shade(int object, vec3 p, vec3 n) {
     vec3 color = vec3(0);
 
     for (int i = 0; i < Lights.length(); ++i) {
@@ -98,7 +97,7 @@ vec3 Shade(vec3 rO, vec3 rD, int object, vec3 p, vec3 n) {
         vec3 l = normalize(lightVec);
 
         float sD;
-        IntersectObject(p + l * 0.001, l, sD);
+        int j = IntersectObject(p + l * 0.001, l, sD);
 
         if (length(lightVec) < sD) {
             float d = Objects[object].diffuse * max(dot(n, l), 0);
@@ -119,16 +118,16 @@ vec3 Trace(vec3 rO, vec3 rD) {
 
     vec3 p = rO + d * rD;
     vec3 n = GetNormal(object, p);
-    return Shade(rO, rD, object, p, n);
+    return Shade(object, p, n);
 }
 
 void main() {
-    vec4 orig = View * vec4(0, 0, 5, 1);
+    vec4 orig = view2world * vec4(0, 0, 5, 1);
     float invWidth = 1.0 / 800.0;
     float invHeight = 1.0 / 600.0;
     float kcx = (gl_FragCoord.x * invWidth - 0.5) * 8;
     float kcy = (gl_FragCoord.y * invHeight - 0.5) * 6;
-    vec4 rayO = View * vec4(kcx, kcy, 0, 1);
+    vec4 rayO = view2world * vec4(kcx, kcy, 0, 1);
     vec3 rayD = normalize(rayO.xyz - orig.xyz);
 
     Objects[0].params.xz -= sin(Time) * cos(Time);
@@ -136,13 +135,21 @@ void main() {
 #ifndef _DEBUG
     Color = vec4(Trace(rayO.xyz, rayD), 1);
 #else
-    Color = vec4(0, 0, 0, 1);
+    Color = vec4(1, 1, 1, 1);
     for (int i = 0; i < Objects.length(); ++i) {
         if (Objects[i].type == 0) {
             float t = IntersectSphere(rayO.xyz, rayD, Objects[i].params.xyz, Objects[i].params.w);
             if (t > 0)
             {
-                Color = vec4(1, 1, 1, 1);
+                highp int t_i = int(t*1000);
+                int wb = 255 * 255;
+                int b = t_i/wb;
+                int rb = t_i - b*wb;
+                int wg = 255;
+                int g = rb/wg;
+                int rg = rb - g*wg;
+                int r = rg;
+                Color = vec4(float(r)/float(255), float(g)/float(255), float(b)/float(255), 1);
                 break;
             }
         }
