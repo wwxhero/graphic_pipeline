@@ -29,7 +29,7 @@ const char* Vsh_visvbo() {
 }
 const char* Fsh_trvial() {
     return OGL_SHADER_BEGIN(130)
-        N  "uniform mat4 View;"
+        N  "uniform mat4 view2world;"
         N  "uniform float Time;"
         N  "in vec4 color_v;"
         N  "out vec4 color_f;"
@@ -40,7 +40,7 @@ const char* Fsh_trvial() {
 const char* Fsh() {
 	return OGL_SHADER_BEGIN(130)
         N  "//#define _DEBUG"
-        N  "uniform mat4 View;"
+        N  "uniform mat4 view2world;"
         N  "uniform float Time;"
         N  "out vec4 Color;"
         N  ""
@@ -162,16 +162,16 @@ const char* Fsh() {
         N  "}"
         N  ""
         N  "void main() {"
-        N  "    vec4 orig = View * vec4(0, 0, 5, 1);"
+        N  "    vec4 orig = view2world * vec4(0, 0, 5, 1);"
         N  "    float invWidth = 1.0 / 800.0;"
         N  "    float invHeight = 1.0 / 600.0;"
         N  "    float kcx = (gl_FragCoord.x * invWidth - 0.5) * 8;"
         N  "    float kcy = (gl_FragCoord.y * invHeight - 0.5) * 6;"
-        N  "    vec4 rayO = View * vec4(kcx, kcy, 0, 1);"
+        N  "    vec4 rayO = view2world * vec4(kcx, kcy, 0, 1);"
         N  "    vec3 rayD = normalize(rayO.xyz - orig.xyz);"
         N  ""
-        N  "    //Objects[0].params.xz -= sin(Time) * cos(Time);"
-        N  "    //Objects[1].params.xz += sin(Time) * cos(Time);"
+        N  "    Objects[0].params.xz -= sin(Time) * cos(Time);"
+        N  "    Objects[1].params.xz += sin(Time) * cos(Time);"
         N  "#ifndef _DEBUG"
         N  "    Color = vec4(Trace(rayO.xyz, rayD), 1);"
         N  "#else"
@@ -320,7 +320,7 @@ void RaytracerGPU::Update() {
 
     glm::vec3 cameraCenter = m_CameraPos + ComputeDirection(mCameraRotX, mCameraRotY);
     glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-    const glm::mat4 view = glm::lookAt(m_CameraPos, cameraCenter, cameraUp);
+    const glm::mat4 world2view = glm::lookAt(m_CameraPos, cameraCenter, cameraUp);
     printf("\nlookAt:"
             "\n\teye=[%5.2f, %5.2f, %5.2f]"
             "\n\tcenter=[%5.2f, %5.2f, %5.2f]"
@@ -328,9 +328,13 @@ void RaytracerGPU::Update() {
         , m_CameraPos.x, m_CameraPos.y, m_CameraPos.z
         , cameraCenter.x, cameraCenter.y, cameraCenter.z
         , cameraUp.x, cameraUp.y, cameraUp.z);
+    for (int i_row = 0; i_row < 4; i_row ++)
+    {
+		printf("\n\t|%5.2f %5.2f %5.2f %5.2f|", world2view[0][i_row], world2view[1][i_row], world2view[2][i_row], world2view[3][i_row]);
+    }
 
     glUseProgram(m_Program);
-    glUniformMatrix4fv(glGetUniformLocation(m_Program, "View"), 1, GL_FALSE, glm::value_ptr(glm::inverse(view)));
+    glUniformMatrix4fv(glGetUniformLocation(m_Program, "view2world"), 1, GL_FALSE, glm::value_ptr(glm::inverse(world2view)));
     glUniform1f(glGetUniformLocation(m_Program, "Time"), currentTime);
 
     glBindVertexArray(m_VAO);
