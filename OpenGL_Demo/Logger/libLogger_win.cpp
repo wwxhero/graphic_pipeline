@@ -3,11 +3,7 @@
 #include <assert.h>
 #include <iostream>
 #define ROUND_UP_SIZE(Value,Pow2) ((SIZE_T) ((((ULONG)(Value)) + (Pow2) - 1) & (~(((LONG)(Pow2)) - 1))))
-#if defined _WIN64
-#define LOG2PHY(p_log) (c_base + (p_log % (unsigned int64_t)c_cap))
-#elif defined _WIN32
 #define LOG2PHY(p_log) (c_base + (p_log % c_cap))
-#endif
 class QueueMem
 {
 public:
@@ -77,11 +73,7 @@ private:
 	char *c_base;
 	unsigned int c_cap;
 	enum {rear = 0, head};
-#ifdef _WIN64
-	typedef unsigned int64_t LogPtr;
-#else
 	typedef unsigned int LogPtr;
-#endif
 	volatile LogPtr m_range[2];
 };
 
