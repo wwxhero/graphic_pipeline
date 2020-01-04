@@ -80,7 +80,7 @@ private:
 class CLogger
 {
 public:
-	CLogger(const char* szPath) : c_nBuckets(2)
+	CLogger(const char* szPath) : c_nBuckets(4)
 	{
 		GetDiskFreeSpaceA(NULL, NULL, &c_secsize, NULL, NULL);
 		SYSTEM_INFO sysInfo;
