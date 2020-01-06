@@ -4,6 +4,8 @@
 #include <iostream>
 #define ROUND_UP_SIZE(Value,Pow2) ((SIZE_T) ((((ULONG)(Value)) + (Pow2) - 1) & (~(((LONG)(Pow2)) - 1))))
 #define LOG2PHY(p_log) (c_base + (p_log % c_cap))
+#define LogPtrMax UCHAR_MAX
+typedef unsigned char LogPtr;
 class QueueMem
 {
 public:
@@ -35,6 +37,11 @@ public:
 		else
 		{
 			volatile LogPtr& p_dst = m_range[head];
+			if (p_dst > LogPtrMax - len)
+			{
+				m_range[rear] = m_range[rear] % c_cap;
+				m_range[head] = m_range[head] % c_cap;
+			}
 			char* p_src = data;
 			char* src_end = data + len;
 			for (; p_src < src_end; p_src ++, p_dst ++)
@@ -73,20 +80,32 @@ private:
 	char *c_base;
 	unsigned int c_cap;
 	enum {rear = 0, head};
-	typedef unsigned int LogPtr;
 	volatile LogPtr m_range[2];
 };
 
 class CLogger
 {
 public:
-	CLogger(const char* szPath) : c_nBuckets(4)
+	CLogger(const char* szPath) 
+#ifdef TEST_OVERFLOW
+		: c_nBuckets(1)
+#else
+		: c_nBuckets(4)
+#endif
 	{
+#ifdef TEST_OVERFLOW
+		c_secsize = 128;
+#else
 		GetDiskFreeSpaceA(NULL, NULL, &c_secsize, NULL, NULL);
+#endif
 		SYSTEM_INFO sysInfo;
 		GetSystemInfo(&sysInfo);
 		DWORD buketsize;
+#ifdef TEST_OVERFLOW
+		DWORD pagebytes = 128;
+#else
 		DWORD pagebytes = sysInfo.dwPageSize;
+#endif
 		if (pagebytes > c_secsize)
 			buketsize = ROUND_UP_SIZE(c_secsize, pagebytes);
 		else
